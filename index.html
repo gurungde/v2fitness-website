@@ -2236,24 +2236,29 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
         <div class="contact-form-card">
           <div class="cfc-title">Book Your Free Consultation</div>
           <div class="cfc-sub">We'll reply within 24 hours to schedule your free 30-minute session. No obligation whatsoever.</div>
-          <form id="contactForm" onsubmit="handleSubmit(event)">
+          <form id="contactForm" action="https://formspree.io/f/xvzyanqd" method="POST" onsubmit="handleSubmit(event)">
+            <!-- Formspree hidden fields -->
+            <input type="hidden" name="_subject" value="New V2Fitness Enquiry 🏋️">
+            <input type="hidden" name="_replyto" value="">
+            <input type="hidden" name="_next" value="">
+
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label">First Name *</label>
-                <input type="text" class="form-input" placeholder="Your name" required>
+                <input type="text" name="first_name" class="form-input" placeholder="Your name" required>
               </div>
               <div class="form-group">
                 <label class="form-label">Phone</label>
-                <input type="tel" class="form-input" placeholder="0468 323 244">
+                <input type="tel" name="phone" class="form-input" placeholder="04XX XXX XXX">
               </div>
             </div>
             <div class="form-group">
               <label class="form-label">Email Address *</label>
-              <input type="email" class="form-input" placeholder="your@email.com" required>
+              <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
             </div>
             <div class="form-group">
               <label class="form-label">I'm interested in</label>
-              <select class="form-select">
+              <select name="program_interest" class="form-select">
                 <option value="">Select a program…</option>
                 <option>Adult 1-on-1 Coaching</option>
                 <option>Kids & Youth Program</option>
@@ -2265,7 +2270,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
             </div>
             <div class="form-group">
               <label class="form-label">Tell us about your goals</label>
-              <textarea class="form-textarea" placeholder="What are you hoping to achieve? Any health considerations or questions?"></textarea>
+              <textarea name="message" class="form-textarea" placeholder="What are you hoping to achieve? Any health considerations or questions?"></textarea>
             </div>
             <button type="submit" class="form-submit" id="submitBtn">Book My Free Consultation →</button>
             <p class="form-note">No spam. No pressure. We reply within 24 hours.</p>
@@ -2390,20 +2395,51 @@ function updateCountdown() {
 updateCountdown();
 
 // ── Form submit
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  const btn = document.getElementById('submitBtn');
-  btn.textContent = '✓ Sent! We\'ll be in touch within 24 hours.';
-  btn.style.background = '#276749';
+  const form = e.target;
+  const btn  = document.getElementById('submitBtn');
+  const data = new FormData(form);
+
+  // Show sending state
+  btn.textContent = '⏳ Sending…';
   btn.disabled = true;
-  btn.style.cursor = 'default';
-  setTimeout(() => {
-    btn.textContent = 'Book My Free Consultation →';
-    btn.style.background = '';
-    btn.disabled = false;
+  btn.style.cursor = 'wait';
+
+  try {
+    const response = await fetch('https://formspree.io/f/xvzyanqd', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      // SUCCESS
+      btn.textContent = '✅ Sent! Coach DG will be in touch within 24 hours.';
+      btn.style.background = '#276749';
+      btn.style.cursor = 'default';
+      form.reset();
+      // Reset button after 6 seconds
+      setTimeout(() => {
+        btn.textContent = 'Book My Free Consultation →';
+        btn.style.background = '';
+        btn.disabled = false;
+        btn.style.cursor = 'pointer';
+      }, 6000);
+    } else {
+      // FORMSPREE ERROR
+      const result = await response.json();
+      throw new Error(result.errors ? result.errors.map(e => e.message).join(', ') : 'Submission failed');
+    }
+  } catch (err) {
+    // NETWORK / OTHER ERROR — fallback to WhatsApp
+    btn.textContent = '❌ Error — tap to message us on WhatsApp instead';
+    btn.style.background = '#25D366';
     btn.style.cursor = 'pointer';
-    e.target.reset();
-  }, 5000);
+    btn.disabled = false;
+    btn.onclick = () => window.open('https://wa.me/61468323244?text=Hi%20Coach%20DG%2C%20I%27d%20like%20to%20book%20a%20free%20consultation!', '_blank');
+    console.error('Form error:', err);
+  }
 }
 
 // ── Smooth scroll for anchor links

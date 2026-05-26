@@ -1135,6 +1135,41 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
   .hero-inner{padding:3rem 5vw !important;}
 }
 
+
+/* HERO TRUST STRIP */
+.trust-strip{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin:20px 0 28px;
+  padding:12px 20px;
+  width:fit-content;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:999px;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  font-size:0.88rem;
+  font-weight:800;
+  color:rgba(255,255,255,0.95);
+  letter-spacing:.01em;
+  box-shadow:0 8px 24px rgba(0,0,0,0.18);
+}
+.trust-strip .divider{opacity:.35;}
+@media (max-width:768px){
+  .trust-strip{
+    font-size:0.72rem;
+    gap:6px;
+    padding:10px 14px;
+    max-width:95%;
+    text-align:center;
+    line-height:1.4;
+  }
+  .trust-strip .divider{display:none;}
+}
+
 </style>
 </head>
 <body>
@@ -1193,6 +1228,13 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
       <p class="hero-sub">
         Holistic coaching for the whole family — movement, nutrition, sleep and recovery. Science-based, community-driven, and designed to transform how your family lives, moves and feels together.
       </p>
+      <div class="trust-strip reveal d2">
+        <span>🏆 Trusted since 2021</span>
+        <span class="divider">|</span>
+        <span>📍 Founded in Sydney</span>
+        <span class="divider">|</span>
+        <span>⭐ 50+ 5★ Reviews</span>
+      </div>
       <div class="hero-btns">
         <a href="#contact" class="btn btn-white">🌱 Start Your Family's Journey</a>
         <a href="#camp" class="btn btn-amber">❄️ Winter School Holiday Program</a>

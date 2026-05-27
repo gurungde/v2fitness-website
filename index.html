@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>V2Fitness | Where Families Come to Thrive | Coach DG | V2Fitness | Springfield · Brisbane</title>
 <meta name="description" content="Outdoor science-based fitness coaching for families, adults, kids and youth in Springfield, Ipswich and Brisbane. Cert III & IV certified. 58 5-star reviews. Book free trial.">
-<meta name="keywords" content="family fitness Springfield, kids fitness Ipswich, youth strength conditioning Brisbane, outdoor group fitness, winter school holiday program 2026, functional training QLD">
+<meta name="keywords" content="family fitness Springfield, kids fitness Ipswich, youth strength conditioning Brisbane, outdoor group fitness, school holiday program 2026, functional training QLD">
 <meta property="og:title" content="V2Fitness | Fitness Without Intimidation">
 <meta property="og:url" content="https://v2fitness.com.au/">
 <meta property="og:description" content="Science-based outdoor coaching for families, kids and adults. 58 five-star reviews. Book your free trial today.">
@@ -663,6 +663,17 @@ h2.title.light em { color: var(--green-l); }
   padding: 0.4rem 1rem; font-size: 0.82rem; font-weight: 700;
   margin-bottom: 1.5rem;
 }
+.camp-countdown {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius); padding: 1rem 1.2rem;
+  display: flex; align-items: center; gap: 12px; margin-bottom: 1.8rem;
+}
+.cc-icon { font-size: 1.6rem; flex-shrink: 0; }
+.cc-text { }
+.cc-title { font-size: 0.82rem; font-weight: 700; color: var(--amber-l); text-transform: uppercase; letter-spacing: 0.06em; }
+.cc-days { font-size: 1.2rem; font-weight: 800; color: #fff; line-height: 1.2; }
+.cc-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
 .camp-features { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
 .cf-item {
   display: flex; align-items: flex-start; gap: 10px;
@@ -938,6 +949,109 @@ footer {
 .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
 .footer-bottom .fb-tagline { font-size: 0.75rem; color: rgba(104,211,145,0.6); font-style: italic; }
 
+
+
+/* ════════════════════════════
+   MEMBERSHIP OPTIONS
+════════════════════════════ */
+#membership {
+  background: linear-gradient(180deg, #fff 0%, var(--green-p) 48%, #fff 100%);
+  position: relative;
+  overflow: hidden;
+}
+#membership::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 7px;
+  background: linear-gradient(90deg, var(--sun), var(--amber), var(--green-m), var(--sky-l));
+}
+.membership-header { text-align: center; max-width: 720px; margin: 0 auto 3.2rem; position: relative; z-index: 2; }
+.membership-header .lead { margin: 0 auto; }
+.membership-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.35rem; position: relative; z-index: 2; }
+.membership-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: 1.8rem;
+  box-shadow: var(--shadow-m);
+  transition: all .28s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.membership-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 5px;
+  background: var(--green-m);
+}
+.membership-card.featured {
+  border-color: rgba(249,115,22,.38);
+  transform: translateY(-8px);
+  box-shadow: 0 18px 52px rgba(18,55,42,.14);
+}
+.membership-card.featured::before { background: linear-gradient(90deg, var(--amber), var(--coral)); }
+.membership-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-l); border-color: var(--green-pp); }
+.membership-card.featured:hover { transform: translateY(-12px); }
+.membership-badge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: .28rem .75rem;
+  border-radius: 999px;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: var(--green-p);
+  color: var(--green);
+  margin-bottom: 1rem;
+}
+.membership-card.featured .membership-badge { background: var(--amber-p); color: var(--amber); }
+.membership-name { font-size: 1.05rem; font-weight: 800; color: var(--ink); letter-spacing: -.03em; margin-bottom: .45rem; }
+.membership-price { display:flex; align-items:flex-end; gap: .25rem; margin: .35rem 0 .35rem; }
+.membership-price .currency { font-size: 1.25rem; font-weight: 800; color: var(--ink); margin-bottom: .25rem; }
+.membership-price .amount { font-size: 3rem; line-height: .95; font-weight: 800; color: var(--forest); letter-spacing: -.07em; }
+.membership-card.featured .membership-price .amount { color: var(--amber); }
+.membership-price .period { font-size: .9rem; color: var(--soft); font-weight: 700; margin-bottom: .35rem; }
+.membership-frequency { font-size: .86rem; font-weight: 700; color: var(--mid); margin-bottom: 1.15rem; }
+.membership-list { display: flex; flex-direction: column; gap: .62rem; margin: 0 0 1.4rem; flex: 1; }
+.membership-list li { display:flex; align-items:flex-start; gap: 9px; font-size: .84rem; line-height: 1.45; color: var(--mid); }
+.membership-list li::before { content:'✓'; color: var(--green-m); font-weight: 900; flex-shrink:0; margin-top: 1px; }
+.membership-note {
+  margin-top: 2rem;
+  background: rgba(255,255,255,.84);
+  border: 1px solid var(--green-pp);
+  border-radius: var(--radius-l);
+  padding: 1.2rem 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .8rem;
+  box-shadow: var(--shadow-s);
+}
+.mn-item { display:flex; align-items:flex-start; gap: 9px; font-size: .82rem; color: var(--mid); font-weight: 600; }
+.mn-item span { font-size: 1rem; line-height: 1.2; }
+.membership-payment {
+  margin-top: 1.1rem;
+  text-align:center;
+  color: var(--soft);
+  font-size: .82rem;
+  line-height: 1.6;
+}
+@media (max-width: 1024px) {
+  .membership-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+  .membership-card.featured { transform: none; }
+  .membership-card.featured:hover { transform: translateY(-6px); }
+  .membership-note { grid-template-columns: 1fr 1fr; max-width: 720px; margin-left:auto; margin-right:auto; }
+}
+@media (max-width: 520px) {
+  .membership-card { padding: 1.45rem; }
+  .membership-note { grid-template-columns: 1fr; }
+  .membership-price .amount { font-size: 2.65rem; }
+}
+
 /* ════════════════════════════
    RESPONSIVE
 ════════════════════════════ */
@@ -1135,41 +1249,6 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
   .hero-inner{padding:3rem 5vw !important;}
 }
 
-
-/* HERO TRUST STRIP */
-.trust-strip{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  margin:20px 0 28px;
-  padding:12px 20px;
-  width:fit-content;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:999px;
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  font-size:0.88rem;
-  font-weight:800;
-  color:rgba(255,255,255,0.95);
-  letter-spacing:.01em;
-  box-shadow:0 8px 24px rgba(0,0,0,0.18);
-}
-.trust-strip .divider{opacity:.35;}
-@media (max-width:768px){
-  .trust-strip{
-    font-size:0.72rem;
-    gap:6px;
-    padding:10px 14px;
-    max-width:95%;
-    text-align:center;
-    line-height:1.4;
-  }
-  .trust-strip .divider{display:none;}
-}
-
 </style>
 </head>
 <body>
@@ -1184,13 +1263,14 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
     <ul class="nav-menu">
       <li><a href="#about">About Us</a></li>
       <li><a href="#programs">Programs</a></li>
+      <li><a href="#membership">Membership</a></li>
       <li><a href="#youth">Kids & Youth</a></li>
       <li><a href="#benchmarking">Tracking</a></li>
       <li><a href="#testimonials">Reviews</a></li>
     </ul>
 
     <div class="nav-actions">
-      <a href="#camp" class="nav-camp-btn">❄️ Winter School Holiday Program</a>
+      <a href="#camp" class="nav-camp-btn">🏕️ School Holiday Programs</a>
       <a href="#contact" class="nav-cta">Book Free Trial</a>
     </div>
 
@@ -1204,11 +1284,12 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
   <a href="#home" onclick="closeNav()">🏠 Home</a>
   <a href="#about" onclick="closeNav()">👤 About Us</a>
   <a href="#programs" onclick="closeNav()">📋 Programs</a>
+  <a href="#membership" onclick="closeNav()">💳 Membership</a>
   <a href="#youth" onclick="closeNav()">🧒 Kids & Youth</a>
   <a href="#benchmarking" onclick="closeNav()">📊 Progress Tracking</a>
   <a href="#testimonials" onclick="closeNav()">⭐ Reviews</a>
   <div class="nav-mobile-divider"></div>
-  <a href="#camp" onclick="closeNav()" class="m-camp">❄️ Winter School Holiday Program</a>
+  <a href="#camp" onclick="closeNav()" class="m-camp">🏕️ School Holiday Programs</a>
   <a href="#contact" onclick="closeNav()" class="m-cta">Book Free Trial →</a>
 </div>
 
@@ -1228,16 +1309,9 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
       <p class="hero-sub">
         Holistic coaching for the whole family — movement, nutrition, sleep and recovery. Science-based, community-driven, and designed to transform how your family lives, moves and feels together.
       </p>
-      <div class="trust-strip reveal d2">
-        <span>🏆 Trusted since 2021</span>
-        <span class="divider">|</span>
-        <span>📍 Founded in Sydney</span>
-        <span class="divider">|</span>
-        <span>⭐ 50+ 5★ Reviews</span>
-      </div>
       <div class="hero-btns">
         <a href="#contact" class="btn btn-white">🌱 Start Your Family's Journey</a>
-        <a href="#camp" class="btn btn-amber">❄️ Winter School Holiday Program</a>
+        <a href="#camp" class="btn btn-amber">🏕️ School Holiday Programs</a>
         <a href="#programs" class="btn btn-outline-w">Explore Programs</a>
       </div>
       <div class="hero-proof">
@@ -1708,8 +1782,8 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
         />
         <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(120,50,10,0.75) 0%,transparent 60%);display:flex;align-items:flex-end;padding:1.5rem;">
           <div>
-            <div style="font-size:0.68rem;font-weight:700;color:#F6AD55;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">❄️ WINTER SCHOOL HOLIDAY PROGRAM</div>
-            <div style="font-size:1.1rem;font-weight:800;color:white;line-height:1.2;">27 June – 12 July 2026<br>Winter program · Ages 6–17 · Limited places</div>
+            <div style="font-size:0.68rem;font-weight:700;color:#F6AD55;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">🏕️ SCHOOL HOLIDAY PROGRAMS</div>
+            <div style="font-size:1.1rem;font-weight:800;color:white;line-height:1.2;">July 7–25, 2026<br>3 weeks · Ages 6–17 · Limited places</div>
           </div>
         </div>
       </div>
@@ -1865,6 +1939,73 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
   </div>
 </section>
 
+
+<!-- ════════════ MEMBERSHIP OPTIONS ════════════ -->
+<section id="membership" class="section section-lg">
+  <div class="container">
+    <div class="membership-header reveal">
+      <span class="eyebrow eyebrow-green">Membership Options</span>
+      <h2 class="title">Simple weekly plans.<br><em>No lock-in. No joining fees.</em></h2>
+      <p class="lead">Flexible group functional training memberships designed around consistency, community and sustainable progress. Payments are made in advance, with direct debit options coming soon.</p>
+    </div>
+
+    <div class="membership-grid">
+      <div class="membership-card reveal">
+        <div class="membership-badge">Getting Started</div>
+        <div class="membership-name">2 Days a Week</div>
+        <div class="membership-price"><span class="currency">$</span><span class="amount">29</span><span class="period">/week</span></div>
+        <div class="membership-frequency">Train 2 days per week</div>
+        <ul class="membership-list">
+          <li>Group functional training sessions</li>
+          <li>Community accountability and fun activities</li>
+          <li>Exciting regular challenges</li>
+          <li>Discounted segmental body composition analysis for $29</li>
+          <li>Pause anytime</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" style="justify-content:center;width:100%;">Start with 2 Days →</a>
+      </div>
+
+      <div class="membership-card featured reveal d1">
+        <div class="membership-badge">Most Popular</div>
+        <div class="membership-name">3 Days a Week</div>
+        <div class="membership-price"><span class="currency">$</span><span class="amount">34</span><span class="period">/week</span></div>
+        <div class="membership-frequency">Train 3 days per week</div>
+        <ul class="membership-list">
+          <li>Everything in the 2-day membership</li>
+          <li>More consistency, accountability and weekly rhythm</li>
+          <li>Segmental body composition analysis</li>
+          <li>Group accountability and fun activities</li>
+          <li>Pause anytime</li>
+        </ul>
+        <a href="#contact" class="btn btn-amber" style="justify-content:center;width:100%;">Choose 3 Days →</a>
+      </div>
+
+      <div class="membership-card reveal d2">
+        <div class="membership-badge">Smash Those Goals</div>
+        <div class="membership-name">5 Days a Week</div>
+        <div class="membership-price"><span class="currency">$</span><span class="amount">49</span><span class="period">/week</span></div>
+        <div class="membership-frequency">Train up to 5 days per week</div>
+        <ul class="membership-list">
+          <li>Maximum weekly training opportunity</li>
+          <li>Segmental body composition analysis + complete fitness test</li>
+          <li>Exciting regular challenges</li>
+          <li>Group accountability and fun activities</li>
+          <li>Pause anytime</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="justify-content:center;width:100%;">Train 5 Days →</a>
+      </div>
+    </div>
+
+    <div class="membership-note reveal d3">
+      <div class="mn-item"><span>✅</span><div>$0 joining fee</div></div>
+      <div class="mn-item"><span>✅</span><div>$0 admin fee</div></div>
+      <div class="mn-item"><span>🔓</span><div>No lock-in contract</div></div>
+      <div class="mn-item"><span>⏸️</span><div>Pause anytime</div></div>
+    </div>
+    <p class="membership-payment reveal d4">Payment is required in advance. Direct debit and secure online payments will be introduced soon via Stripe.</p>
+  </div>
+</section>
+
 <!-- ════════════ KIDS & YOUTH ════════════ -->
 <section id="youth" class="section">
   <div class="container">
@@ -1960,16 +2101,25 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
   </div>
 </section>
 
-<!-- ════════════ WINTER SCHOOL HOLIDAY PROGRAM ════════════ -->
+<!-- ════════════ SCHOOL HOLIDAY PROGRAM ════════════ -->
 <section id="camp" class="section section-dark section-lg">
   <div class="container">
     <div class="camp-inner">
       <div class="camp-text reveal">
-        <span class="eyebrow eyebrow-amber">❄️ Winter School Holiday Program</span>
-        <h2 class="title light">Winter 2026<br><em>School Holiday Program</em></h2>
-        <p class="lead light">An action-packed winter school holiday program of outdoor fitness, movement science, teamwork and confidence-building for ages 6–17. Science-backed. Zero intimidation. Maximum fun.</p>
+        <span class="eyebrow eyebrow-amber">🏕️ School Holiday Program</span>
+        <h2 class="title light">July 2026<br><em>School Holiday Program</em></h2>
+        <p class="lead light">Three action-packed weeks of outdoor fitness, movement science, teamwork and confidence-building for ages 6–17. Science-backed. Zero intimidation. Maximum fun.</p>
 
-        <div class="camp-dates-chip">📅 27 June – 12 July 2026 · Winter School Holiday Program</div>
+        <div class="camp-dates-chip">📅 July 7 – July 25, 2026 · 3 Full Weeks</div>
+
+        <div class="camp-countdown">
+          <div class="cc-icon">⏳</div>
+          <div class="cc-text">
+            <div class="cc-title">Program Countdown</div>
+            <div class="cc-days" id="campDays">Loading…</div>
+            <div class="cc-sub">Registrations open now — places are limited</div>
+          </div>
+        </div>
 
         <div class="camp-features">
           <div class="cf-item">
@@ -1995,7 +2145,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
         </div>
 
         <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-          <a href="#contact" class="btn btn-amber">❄️ Register for Winter School Holiday Program</a>
+          <a href="#contact" class="btn btn-amber">🏕️ Register for School Holiday Program</a>
           <a href="#contact" class="btn btn-outline-w">Ask a Question</a>
         </div>
       </div>
@@ -2004,7 +2154,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
         <div class="camp-weeks">
           <div class="week-card">
             <div class="wk-head">
-              <div><div class="wk-num">Week 1 · 27 June – 3 July</div><div class="wk-title">Move Well, Move Often</div></div>
+              <div><div class="wk-num">Week 1 · July 7–11</div><div class="wk-title">Move Well, Move Often</div></div>
             </div>
             <div class="wk-body">
               <p class="wk-desc">Fundamental movement skills, coordination and baseline fitness testing. We assess each child and establish their starting point.</p>
@@ -2019,7 +2169,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 
           <div class="week-card featured">
             <div class="wk-head">
-              <div><div class="wk-num">Week 2 · 4 July – 10 July</div><div class="wk-title">Strength, Speed & Power</div></div>
+              <div><div class="wk-num">Week 2 · July 14–18</div><div class="wk-title">Strength, Speed & Power</div></div>
               <span class="wk-badge">⭐ Popular</span>
             </div>
             <div class="wk-body">
@@ -2035,10 +2185,10 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 
           <div class="week-card">
             <div class="wk-head">
-              <div><div class="wk-num">Final Weekend · 11–12 July</div><div class="wk-title">Endurance, Wellness & Celebration</div></div>
+              <div><div class="wk-num">Week 3 · July 21–25</div><div class="wk-title">Endurance, Wellness & Celebration</div></div>
             </div>
             <div class="wk-body">
-              <p class="wk-desc">Aerobic fitness, nutrition workshop, sleep education. Includes a final winter fitness challenge to show every child's progress.</p>
+              <p class="wk-desc">Aerobic fitness, nutrition workshop, sleep education. Ends with a celebration fitness challenge to show every child's progress.</p>
               <div class="wk-tags">
                 <span class="wk-tag">Cardio Fitness</span>
                 <span class="wk-tag">Nutrition</span>
@@ -2401,6 +2551,20 @@ const revObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); } });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+// ── Program countdown
+function updateCountdown() {
+  const target = new Date('2026-07-07T00:00:00');
+  const now = new Date();
+  const diff = target - now;
+  const el = document.getElementById('campDays');
+  if (!el) return;
+  if (diff <= 0) { el.textContent = '🏕️ Program is on now!'; return; }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const weeks = Math.floor(days / 7);
+  el.textContent = weeks > 0 ? `${days} days (${weeks} weeks) until program starts` : `${days} days until program starts`;
+}
+updateCountdown();
 
 // ── Form submit
 async function handleSubmit(e) {

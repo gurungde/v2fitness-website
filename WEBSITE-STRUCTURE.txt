@@ -1,0 +1,52 @@
+V2FITNESS FINAL COMPLETE WEBSITE STRUCTURE
+
+v2fitness-website-final-complete/
+|
+|-- index.html
+|   Main V2Fitness homepage
+|
+|-- youth-os/
+|   |-- index.html
+|   |   V2 Youth OS landing page
+|   |
+|   |-- growth-maturation/
+|       |-- index.html
+|           Module 01 calculator:
+|           Adult Height Estimator + PHV / Maturity Offset
+|
+|-- privacy/
+|   |-- index.html
+|
+|-- terms/
+|   |-- index.html
+|
+|-- _redirects
+|-- robots.txt
+|-- sitemap.xml
+|-- START-LOCAL-TEST.bat
+|-- START-LOCAL-TEST.ps1
+|-- README-LOCAL-TEST.txt
+|-- WEBSITE-STRUCTURE.txt
+
+LOCAL LIVE SERVER TEST URLS
+
+Main website:
+http://127.0.0.1:5500/
+
+Youth OS landing page:
+http://127.0.0.1:5500/youth-os/
+
+Module 01:
+http://127.0.0.1:5500/youth-os/growth-maturation/
+
+Privacy:
+http://127.0.0.1:5500/privacy/
+
+Terms:
+http://127.0.0.1:5500/terms/
+
+IMPORTANT
+- Open the entire folder in VS Code.
+- Start Live Server from the ROOT index.html.
+- Do not start Live Server from youth-os/index.html, otherwise the server root can be wrong.
+- The Netlify _redirects file is only processed after Netlify deployment.

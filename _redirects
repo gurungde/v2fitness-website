@@ -1,0 +1,8 @@
+/height /youth-os/adult-height-estimator/ 301
+/predict /youth-os/adult-height-estimator/ 301
+/youth /youth-os/ 301
+/youth-os/predict-adult-height/ /youth-os/growth-maturation/ 301
+
+/phv /youth-os/growth-spurt-estimator/ 301
+/growth-spurt /youth-os/growth-spurt-estimator/ 301
+/* /404.html 404

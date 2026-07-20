@@ -1,0 +1,27 @@
+V2FITNESS / V2 YOUTH OS V4
+
+index.html
+youth-os/
+  index.html                         Youth OS landing page
+  growth-maturation/
+    index.html                       Hub for Modules 01 and 02
+  adult-height-estimator/
+    index.html                       Module 01: Khamis-Roche
+  growth-spurt-estimator/
+    index.html                       Module 02: Mirwald PHV
+privacy/
+  index.html
+terms/
+  index.html
+_redirects
+robots.txt
+sitemap.xml
+
+LOCAL TEST
+http://127.0.0.1:5500/
+http://127.0.0.1:5500/youth-os/
+http://127.0.0.1:5500/youth-os/growth-maturation/
+http://127.0.0.1:5500/youth-os/adult-height-estimator/
+http://127.0.0.1:5500/youth-os/growth-spurt-estimator/
+http://127.0.0.1:5500/privacy/
+http://127.0.0.1:5500/terms/

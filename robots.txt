@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://v2fitness.com.au/sitemap.xml

@@ -1324,6 +1324,49 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
   .nav-camp-btn{display:none}
 }
 
+
+/* ════════════════════════════
+   COMMUNITY BENCHMARK DAY
+════════════════════════════ */
+#benchmark-day{background:linear-gradient(145deg,#FFF8DF 0%,#FFFDF5 38%,#E9FFF4 100%);position:relative;overflow:hidden;border-top:1px solid #F4D778;border-bottom:1px solid #BFE8D3}
+#benchmark-day:before{content:'';position:absolute;left:0;right:0;top:0;height:7px;background:linear-gradient(90deg,var(--sun),var(--amber),var(--green-m),var(--sky-l))}
+.bmd-head{text-align:center;max-width:760px;margin:0 auto 2.4rem}
+.bmd-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:1.5rem;align-items:stretch}
+.bmd-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-l);padding:1.7rem;box-shadow:var(--shadow-m)}
+.bmd-card.primary{background:linear-gradient(145deg,#0F2A1A,#12372A 62%,#0B4654);color:#fff;border:none}
+.bmd-date{font-size:1.65rem;font-weight:800;letter-spacing:-.04em;line-height:1.15;margin:.25rem 0 .65rem}
+.bmd-meta{font-size:.86rem;color:rgba(255,255,255,.72);line-height:1.65}
+.bmd-free{display:inline-flex;margin-top:1rem;background:#FFD447;color:#12372A;padding:.38rem .78rem;border-radius:999px;font-size:.72rem;font-weight:900;letter-spacing:.05em}
+.bmd-times{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1.1rem}
+.bmd-time{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.9rem}
+.bmd-time strong{display:block;font-size:.9rem;color:#fff;margin-bottom:.25rem}.bmd-time span{display:block;font-size:.75rem;color:rgba(255,255,255,.62);line-height:1.45}
+.bmd-list{display:flex;flex-direction:column;gap:.72rem;margin:1rem 0 1.2rem}.bmd-list li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;color:var(--mid);line-height:1.5}.bmd-list li:before{content:'✓';color:var(--green-m);font-weight:900}
+.bmd-apss{background:var(--green-p);border:1px solid var(--green-pp);border-radius:12px;padding:1rem;font-size:.8rem;line-height:1.55;color:var(--mid);margin:1rem 0}
+.bmd-calendar{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:.8rem}.bmd-chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.32rem .68rem;font-size:.74rem;font-weight:800;color:var(--forest)}
+.bmd-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem}
+#benchmark-day:after{content:'NEXT EVENT · 13 SEP';position:absolute;right:-42px;top:44px;transform:rotate(35deg);background:#FFD447;color:#12372A;padding:.5rem 3.4rem;font-size:.66rem;font-weight:950;letter-spacing:.1em;box-shadow:0 5px 18px rgba(18,55,42,.14)}
+.bmd-head .title{font-size:clamp(2.25rem,4.2vw,4rem);line-height:1.02}
+.bmd-head .lead{font-size:1.02rem}
+.bmd-alert{display:inline-flex;align-items:center;gap:.55rem;background:#12372A;color:#fff;border-radius:999px;padding:.5rem .9rem;margin-bottom:.85rem;font-size:.72rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;box-shadow:0 8px 22px rgba(18,55,42,.18)}
+.bmd-alert-dot{width:9px;height:9px;border-radius:50%;background:#FFD447;box-shadow:0 0 0 5px rgba(255,212,71,.16)}
+.bmd-card.primary{box-shadow:0 18px 42px rgba(18,55,42,.22);transform:translateY(-4px)}
+.bmd-free{font-size:.8rem;padding:.52rem .9rem;box-shadow:0 6px 16px rgba(255,212,71,.2)}
+.bmd-actions .btn-primary{font-size:.88rem;padding:.85rem 1.15rem;box-shadow:0 10px 24px rgba(19,138,91,.2)}
+.bmd-urgency{display:flex;align-items:center;gap:.65rem;margin-top:1rem;padding:.8rem .95rem;border-radius:12px;background:#FFD447;color:#12372A;font-weight:900;box-shadow:0 8px 22px rgba(255,212,71,.22)}
+.bmd-urgency strong{font-size:1.12rem}.bmd-urgency span{font-size:.72rem;line-height:1.4}
+.preference-panel{display:none;padding:1.05rem;border:1px solid var(--green-pp);border-radius:14px;background:var(--green-p);margin-bottom:1rem}
+.preference-panel.is-visible{display:block}
+.pref-title{font-weight:900;color:var(--forest);font-size:.94rem;margin-bottom:.25rem}.pref-copy{font-size:.76rem;color:var(--mid);line-height:1.5;margin-bottom:.85rem}
+.choice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:.48rem;margin-bottom:.85rem}
+.choice-pill{display:flex;align-items:center;gap:.42rem;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .62rem;font-size:.72rem;font-weight:700;color:var(--ink-2);cursor:pointer}
+.choice-pill input{accent-color:var(--green);width:15px;height:15px}
+.screening-panel{display:none;padding:1rem;border:2px solid #F6AD55;border-radius:14px;background:#FFFAF0;margin-bottom:1rem}.screening-panel.is-visible{display:block}
+.screening-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.6rem;margin:.75rem 0}.screening-link{display:block;background:#fff;border:1px solid #F6AD55;border-radius:10px;padding:.7rem;font-size:.73rem;font-weight:800;color:#7B341E;text-decoration:none}
+.online-section{background:linear-gradient(145deg,#E8F7FB,#fff 45%,#E9FFF4);position:relative;overflow:hidden}.online-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:1.4rem;align-items:center}.online-card{background:#fff;border:1px solid var(--green-pp);border-radius:var(--radius-l);padding:1.5rem;box-shadow:var(--shadow-m)}.online-points{display:grid;gap:.65rem;margin:1rem 0}.online-point{display:flex;gap:.65rem;align-items:flex-start;font-size:.82rem;line-height:1.5;color:var(--mid)}.online-point b{color:var(--forest)}.online-badge{display:inline-flex;background:#2B6CB0;color:#fff;border-radius:999px;padding:.45rem .8rem;font-size:.7rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:900px){#benchmark-day:after{display:none}.bmd-card.primary{transform:none}}
+
+@media(max-width:900px){.bmd-grid,.online-grid{grid-template-columns:1fr}.bmd-times{grid-template-columns:1fr}}
+
 </style>
 <meta content="#12372A" name="theme-color"/><meta content="index,follow,max-image-preview:large" name="robots"/><link href="/assets/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/assets/site.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="V2Fitness" property="og:site_name"/><meta content="en_AU" property="og:locale"/><meta content="summary" name="twitter:card"/><meta content="V2Fitness | Kids, Youth &amp; Family Fitness in Springfield" name="twitter:title"/><meta content="V2Fitness provides evidence-informed outdoor fitness for kids, youth and families, with privacy-first Youth OS growth and maturation tools." name="twitter:description"/></head>
 <body>
@@ -1338,13 +1381,15 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <li><a href="#programs">Programs</a></li>
 <li><a href="#membership">Membership</a></li>
 <li><a href="#youth">Kids &amp; Youth</a></li>
+<li><a href="#benchmark-day" style="font-weight:800;color:var(--amber)">Benchmark Day</a></li>
 <li><a class="youth-os-nav" href="/youth-os/">Youth OS</a></li>
 <li><a href="#benchmarking">Tracking</a></li>
+<li><a href="#online-classes" style="font-weight:800;color:var(--sky)">Online <span style="font-size:.52rem;background:var(--sky-p);padding:2px 4px;border-radius:999px;vertical-align:top">UPCOMING</span></a></li>
 <li><a href="#testimonials">Reviews</a></li>
 </ul>
 <div class="nav-actions">
 <a class="nav-camp-btn" href="#camp">🏕️ School Holiday Programs</a>
-<a class="nav-cta" href="#contact">Book Free Trial</a>
+<a class="nav-cta" href="#contact" onclick="selectInterest('FREE Trial Class — Adult or Youth')">Book Free Trial</a>
 </div>
 <button aria-label="Menu" class="nav-hamburger" id="hamburger" onclick="toggleNav()" type="button">
 <span></span><span></span><span></span>
@@ -1357,12 +1402,14 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <a href="#programs" onclick="closeNav()">📋 Programs</a>
 <a href="#membership" onclick="closeNav()">💳 Membership</a>
 <a href="#youth" onclick="closeNav()">🧒 Kids &amp; Youth</a>
+<a href="#benchmark-day" onclick="closeNav()" style="background:var(--amber-p);color:var(--amber);font-weight:800">📊 Free Benchmark Day · 13 Sep</a>
 <a href="/youth-os/" onclick="closeNav()" style="background:linear-gradient(135deg,#12372A,#138A5B);color:#fff;font-weight:800">🧬 Youth OS — Growth &amp; Maturation</a>
 <a href="#benchmarking" onclick="closeNav()">📊 Progress Tracking</a>
+<a href="#online-classes" onclick="closeNav()" style="background:var(--sky-p);color:var(--sky);font-weight:800">💻 Online Classes — Upcoming</a>
 <a href="#testimonials" onclick="closeNav()">⭐ Reviews</a>
 <div class="nav-mobile-divider"></div>
 <a class="m-camp" href="#camp" onclick="closeNav()">🏕️ School Holiday Programs</a>
-<a class="m-cta" href="#contact" onclick="closeNav()">Book Free Trial →</a>
+<a class="m-cta" href="#contact" onclick="selectInterest('FREE Trial Class — Adult or Youth');closeNav()">Book Free Trial →</a>
 </div>
 <!-- ════════════ HERO ════════════ -->
 <section id="home">
@@ -1384,6 +1431,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <a class="btn btn-white" href="#contact">🌱 Start Your Family's Journey</a>
 <a class="btn btn-amber" href="#camp">🏕️ School Holiday Programs</a>
 <a class="btn btn-outline-w" href="#programs">Explore Programs</a>
+<a class="btn btn-amber" href="#benchmark-day">📊 Free Benchmark Day · 13 Sep</a>
 <a class="btn btn-outline-w" href="/youth-os/adult-height-estimator/">🧬 Free Adult Height Estimator</a>
 </div>
 <div class="hero-proof">
@@ -1797,7 +1845,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(120,50,10,0.75) 0%,transparent 60%);display:flex;align-items:flex-end;padding:1.5rem;">
 <div>
 <div style="font-size:0.68rem;font-weight:700;color:#F6AD55;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">🏕️ SCHOOL HOLIDAY PROGRAMS</div>
-<div style="font-size:1.1rem;font-weight:800;color:white;line-height:1.2;">July 7–25, 2026<br/>3 weeks · Ages 6–17 · Limited places</div>
+<div style="font-size:1.1rem;font-weight:800;color:white;line-height:1.2;">19 Sep–5 Oct 2026<br/>Ages 6–17 · Only 10 places</div>
 </div>
 </div>
 </div>
@@ -1969,7 +2017,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <li>Speed, agility &amp; coordination</li>
 <li>Sport-specific development options</li>
 <li>Nutrition basics for growing athletes</li>
-<li>July school holiday program included</li>
+<li>School holiday fitness intensives available</li>
 </ul>
 <a class="prog-link" href="#youth" style="color:var(--amber)">Learn more <span>→</span></a>
 </div>
@@ -2154,15 +2202,15 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <div class="camp-inner">
 <div class="camp-text reveal">
 <span class="eyebrow eyebrow-amber">🏕️ School Holiday Program</span>
-<h2 class="title light">July 2026<br/><em>School Holiday Program</em></h2>
-<p class="lead light">Three action-packed weeks of outdoor fitness, movement science, teamwork and confidence-building for ages 6–17. Science-backed. Zero intimidation. Maximum fun.</p>
-<div class="camp-dates-chip">📅 July 7 – July 25, 2026 · 3 Full Weeks</div>
+<h2 class="title light">Term 3 Holidays 2026<br/><em>Move. Grow. Belong.</em></h2>
+<p class="lead light">A small-group outdoor experience where kids and teens build movement skills, strength, confidence and friendships—guided by science-informed coaching and V2Fitness Youth OS insights.</p>
+<div class="camp-dates-chip">📅 Saturday 19 September – Monday 5 October 2026</div>
 <div class="camp-countdown">
 <div class="cc-icon">⏳</div>
 <div class="cc-text">
 <div class="cc-title">Program Countdown</div>
 <div class="cc-days" id="campDays">Loading…</div>
-<div class="cc-sub">Registrations open now — places are limited</div>
+<div class="cc-sub">Register your interest now — only 10 participant places</div>
 </div>
 </div>
 <div class="camp-features">
@@ -2176,19 +2224,19 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 </div>
 <div class="cf-item">
 <div class="cf-check">✓</div>
-<p><strong>Start &amp; end fitness benchmarks</strong> so every child sees measurable improvement.</p>
+<p><strong>Age-appropriate fitness baseline &amp; progress feedback</strong> focused on each child's development—not comparison.</p>
 </div>
 <div class="cf-item">
 <div class="cf-check">✓</div>
-<p><strong>Small group sizes</strong> — individual attention guaranteed for every child.</p>
+<p><strong>Only 10 places</strong> — deliberately limited for safe coaching and meaningful individual attention.</p>
 </div>
 <div class="cf-item">
 <div class="cf-check">✓</div>
-<p><strong>Weekly parent info night</strong> — you'll know exactly what your child is learning.</p>
+<p><strong>Parent-friendly feedback</strong> — understand what your child is learning and how healthy habits can continue at home.</p>
 </div>
 </div>
 <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-<a class="btn btn-amber" href="#contact">🏕️ Register for School Holiday Program</a>
+<a class="btn btn-amber" href="#contact" onclick="selectInterest('Term 3 School Holiday Program — 19 Sep to 5 Oct')">🏕️ Register Interest — 10 Places</a>
 <a class="btn btn-outline-w" href="#contact">Ask a Question</a>
 </div>
 </div>
@@ -2196,7 +2244,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <div class="camp-weeks">
 <div class="week-card">
 <div class="wk-head">
-<div><div class="wk-num">Week 1 · July 7–11</div><div class="wk-title">Move Well, Move Often</div></div>
+<div><div class="wk-num">Program Pillar 1</div><div class="wk-title">Move Well &amp; Build Confidence</div></div>
 </div>
 <div class="wk-body">
 <p class="wk-desc">Fundamental movement skills, coordination and baseline fitness testing. We assess each child and establish their starting point.</p>
@@ -2210,7 +2258,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 </div>
 <div class="week-card featured">
 <div class="wk-head">
-<div><div class="wk-num">Week 2 · July 14–18</div><div class="wk-title">Strength, Speed &amp; Power</div></div>
+<div><div class="wk-num">Program Pillar 2</div><div class="wk-title">Strength, Speed &amp; Agility</div></div>
 <span class="wk-badge">⭐ Popular</span>
 </div>
 <div class="wk-body">
@@ -2225,10 +2273,10 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 </div>
 <div class="week-card">
 <div class="wk-head">
-<div><div class="wk-num">Week 3 · July 21–25</div><div class="wk-title">Endurance, Wellness &amp; Celebration</div></div>
+<div><div class="wk-num">Program Pillar 3</div><div class="wk-title">Teamwork, Fitness &amp; Healthy Habits</div></div>
 </div>
 <div class="wk-body">
-<p class="wk-desc">Aerobic fitness, nutrition workshop, sleep education. Ends with a celebration fitness challenge to show every child's progress.</p>
+<p class="wk-desc">Aerobic fitness, cooperative challenges and practical guidance on recovery, sleep and everyday healthy choices.</p>
 <div class="wk-tags">
 <span class="wk-tag">Cardio Fitness</span>
 <span class="wk-tag">Nutrition</span>
@@ -2239,13 +2287,54 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 </div>
 <div class="spots-note">
 <span class="spots-dot"></span>
-            Small group sizes to ensure individual attention for every child. Register early to secure a place.
+            Parents may select any day and either 7:00–8:00 am, 8:00–9:00 am or both. The final timetable will be shaped by family preferences and confirmed by V2Fitness.
           </div>
 </div>
 </div>
 </div>
 </div>
 </section>
+<!-- ════════════ COMMUNITY BENCHMARK DAY ════════════ -->
+<section class="section" id="benchmark-day">
+  <div class="container">
+    <div class="bmd-head reveal">
+      <div class="bmd-alert"><span class="bmd-alert-dot"></span> Registrations open · only 10 free community places</div><br/>
+      <span class="eyebrow eyebrow-amber">📊 Community Assessment &amp; Benchmarking</span>
+      <h2 class="title">Know your starting point.<br/><em>Measure your progress.</em></h2>
+      <p class="lead" style="margin:0 auto;">A welcoming, coach-led fitness check for local adults, kids and families. Understand your starting point across key fitness qualities, receive meaningful context and leave with a clearer direction—not a judgement or comparison.</p>
+    </div>
+    <div class="bmd-grid">
+      <div class="bmd-card primary reveal">
+        <div style="font-size:.72rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:#7CFFC4;">Next Benchmark Day</div>
+        <div class="bmd-date">Sunday, 13 September 2026</div>
+        <div class="bmd-meta">Silver Jubilee Park · Springfield<br/>A structured benchmark morning repeated every 6 weeks.</div>
+        <div class="bmd-urgency"><strong>10 FREE SPOTS</strong><span>First confirmed community bookings only. Screening and coach confirmation are required.</span></div>
+        <div class="bmd-times">
+          <div class="bmd-time"><strong>Adults · 7:00–8:00 am</strong><span>Baseline and progress assessments for adults.</span></div>
+          <div class="bmd-time"><strong>Kids &amp; Youth · 8:00–9:00 am</strong><span>Age-appropriate benchmarking for children and young athletes.</span></div>
+        </div>
+        <div style="margin-top:1.15rem;font-size:.75rem;font-weight:800;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.07em;">Indicative 2026 dates</div>
+        <div class="bmd-calendar"><span class="bmd-chip">13 Sep</span><span class="bmd-chip">25 Oct</span><span class="bmd-chip">6 Dec</span></div>
+      </div>
+      <div class="bmd-card reveal d1">
+        <div style="font-size:1.05rem;font-weight:800;color:var(--ink);">How places work</div>
+        <ul class="bmd-list">
+          <li>V2Fitness members and their children receive first preference.</li>
+          <li>Remaining capacity is then opened to the community.</li>
+          <li>Only 10 complimentary community places are available for the 13 September event.</li>
+          <li>Results can be used as a baseline and compared again at future 6-week benchmark sessions.</li>
+        </ul>
+        <div class="bmd-apss"><strong>APSS pre-screening is mandatory before attendance.</strong><br/>Adults must complete the required pre-exercise screening before their booking is confirmed. For kids/youth, the parent or guardian must complete the relevant screening and consent. A registration request is not a confirmed place until screening is complete and accepted by V2Fitness.</div>
+        <div class="bmd-actions">
+          <a class="btn btn-primary" href="#contact" onclick="selectInterest('FREE Community Benchmark Day — 13 Sep 2026')">Reserve One of 10 FREE Places →</a>
+          <a class="btn btn-outline" href="#contact">Ask a Question</a>
+        </div>
+        <p style="font-size:.7rem;color:var(--soft);margin-top:.8rem;">*A request does not guarantee a place. Date, times, format and availability may change due to weather, venue access, participant safety, minimum registrations or operational requirements. V2Fitness will notify registered participants of material changes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ════════════ BENCHMARKING ════════════ -->
 <section class="section section-green-p" id="benchmarking">
 <div class="container">
@@ -2297,6 +2386,31 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <p class="bc-text">Without a baseline, you're guessing. Regular testing with validated protocols gives you objective proof of progress — and keeps motivation sky-high when you can see the numbers move.</p>
 </div>
 </div>
+</div>
+</div>
+</section>
+<!-- ════════════ UPCOMING ONLINE CLASSES ════════════ -->
+<section class="section online-section" id="online-classes">
+<div class="container online-grid">
+<div class="reveal">
+<span class="online-badge">💻 Upcoming · Expression of Interest</span>
+<h2 class="title" style="margin-top:.8rem;">The V2Fitness community,<br/><em>wherever you are.</em></h2>
+<p class="lead">Live, coach-led online group fitness is being shaped for former clients, busy parents, travellers and people outside Springfield—including interstate and international participants.</p>
+<div class="online-points">
+<div class="online-point"><span>✓</span><div><b>Real coaching, not another recorded workout.</b> Live instruction, technique cues and appropriate exercise options.</div></div>
+<div class="online-point"><span>✓</span><div><b>Community accountability.</b> Train with familiar people and build consistency even when location changes.</div></div>
+<div class="online-point"><span>✓</span><div><b>One consistent time: 5:30–6:30 am Brisbane time (AEST).</b> Monday, Wednesday and Friday extend the existing Springfield class online; Tuesday, Thursday, Saturday and Sunday are dedicated online-only options.</div></div>
+</div>
+<a class="btn btn-primary" href="#contact" onclick="selectInterest('Online Group Classes — Expression of Interest')">Register Online Class Interest →</a>
+</div>
+<div class="online-card reveal d1">
+<div style="font-size:1.05rem;font-weight:900;color:var(--forest);">Built on the same V2Fitness care</div>
+<p style="font-size:.82rem;line-height:1.65;color:var(--mid);margin:.65rem 0 1rem;">Evidence-informed programming, a supportive coach and a community-first environment—extended beyond the park. Choose which 5:30–6:30 am Brisbane-time days you would genuinely attend.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem;">
+<div style="background:var(--green-p);border-radius:12px;padding:.8rem;"><strong style="display:block;color:var(--forest);">Hybrid · Mon/Wed/Fri</strong><span style="font-size:.72rem;color:var(--mid);">Join the existing physical class live online · 5:30–6:30 am AEST</span></div>
+<div style="background:var(--sky-p);border-radius:12px;padding:.8rem;"><strong style="display:block;color:var(--forest);">Online-only · Tue/Thu/Sat/Sun</strong><span style="font-size:.72rem;color:var(--mid);">Dedicated online class option · 5:30–6:30 am AEST</span></div>
+</div>
+<p style="font-size:.7rem;color:var(--soft);line-height:1.5;margin-top:1rem;">Expression of interest only. The 5:30–6:30 am Brisbane time (AEST) is fixed; launch date, platform, pricing and viable days will be confirmed after demand and participant time zones are reviewed.</p>
 </div>
 </div>
 </section>
@@ -2402,11 +2516,11 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <div class="ch-val">Message us directly — reply within the hour</div>
 </div>
 </a>
-<a class="ch-item" href="mailto:dgv2fitness@gmail.com">
+<a class="ch-item" href="mailto:info@v2fitness.com.au">
 <div class="ch-icon ic-em">📧</div>
 <div>
 <div class="ch-label">Email</div>
-<div class="ch-val">dgv2fitness@gmail.com</div>
+<div class="ch-val">info@v2fitness.com.au</div>
 </div>
 </a>
 <a class="ch-item" href="tel:+61468323244">
@@ -2423,14 +2537,14 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <span class="loc-chip">📍 Springfield</span>
 <span class="loc-chip">📍 Ipswich</span>
 <span class="loc-chip">📍 Brisbane</span>
-<span class="loc-chip">💻 Online Coaching</span>
+<span class="loc-chip">💻 Online Classes — Upcoming</span>
 </div>
 </div>
 </div>
 <div class="reveal d1">
 <div class="contact-form-card">
-<div class="cfc-title">Book Your Free Consultation</div>
-<div class="cfc-sub">We'll reply within 24 hours to schedule your free 30-minute session. No obligation whatsoever.</div>
+<div class="cfc-title">Find Your Place in the V2Fitness Community</div>
+<div class="cfc-sub">Enquire, request one of the limited community places or help shape an upcoming program. No payment is required here; Coach DG will personally confirm the next step.</div>
 <form action="https://formspree.io/f/xvzyanqd" id="contactForm" method="POST" onsubmit="handleSubmit(event)">
 <!-- Formspree hidden fields -->
 <input name="_subject" type="hidden" value="New V2Fitness Enquiry 🏋️"/>
@@ -2452,21 +2566,68 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 </div>
 <div class="form-group">
 <label class="form-label">I'm interested in</label>
-<select class="form-select" name="program_interest">
+<select class="form-select" id="programInterest" name="program_interest" onchange="updateInterestForm()">
 <option value="">Select a program…</option>
 <option>Adult 1-on-1 Coaching</option>
+<option>FREE Trial Class — Adult or Youth</option>
 <option>Kids &amp; Youth Program</option>
 <option>Family Package</option>
-<option>July 2026 School Holiday Program</option>
-<option>Online Coaching</option>
+<option>FREE Community Benchmark Day — 13 Sep 2026</option>
+<option>Term 3 School Holiday Program — 19 Sep to 5 Oct</option>
+<option>Online Group Classes — Expression of Interest</option>
 <option>Just exploring my options</option>
 </select>
 </div>
+<div class="preference-panel" id="participantPanel">
+<div class="pref-title">Who will participate?</div>
+<div class="pref-copy">Choose the participant group so we can direct you to the correct pre-exercise screening form.</div>
+<select class="form-select" id="participantType" name="participant_type" onchange="updateScreeningLinks()">
+<option value="">Select participant group…</option>
+<option value="adult">Adult (18+)</option>
+<option value="child">Child (5–15) — parent/guardian form</option>
+<option value="youth">Young person (16–17)</option>
+</select>
+</div>
+<div class="preference-panel" id="schedulePanel">
+<div class="pref-title" id="scheduleTitle">Choose preferred days and times</div>
+<div class="pref-copy" id="scheduleCopy">Select all options that could work. Preferences help V2Fitness build the most practical schedule and do not guarantee a session.</div>
+<div style="font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--soft);margin-bottom:.45rem;">Preferred days — select all that apply</div>
+<div class="choice-grid">
+<label class="choice-pill"><input name="preferred_days" type="checkbox" value="Monday"/>Mon</label>
+<label class="choice-pill"><input name="preferred_days" type="checkbox" value="Tuesday"/>Tue</label>
+<label class="choice-pill"><input name="preferred_days" type="checkbox" value="Wednesday"/>Wed</label>
+<label class="choice-pill"><input name="preferred_days" type="checkbox" value="Thursday"/>Thu</label>
+<label class="choice-pill"><input name="preferred_days" type="checkbox" value="Friday"/>Fri</label>
+<label class="choice-pill"><input name="preferred_days" type="checkbox" value="Saturday"/>Sat</label>
+<label class="choice-pill"><input name="preferred_days" type="checkbox" value="Sunday"/>Sun</label>
+</div>
+<div style="font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--soft);margin-bottom:.45rem;">Preferred times — select all that apply</div>
+<div class="choice-grid" id="timeChoices">
+<label class="choice-pill school-time"><input name="preferred_times" type="checkbox" value="7:00–8:00 am"/>7:00–8:00 am</label>
+<label class="choice-pill school-time"><input name="preferred_times" type="checkbox" value="8:00–9:00 am"/>8:00–9:00 am</label>
+<label class="choice-pill online-time" style="display:none;"><input name="preferred_times" type="checkbox" value="5:30–6:30 am Brisbane time (AEST)"/>5:30–6:30 am AEST · fixed online time</label>
+</div>
+<div id="timezoneRow" style="display:none;">
+<label class="form-label">City / country and time zone</label>
+<input class="form-input" name="online_location_timezone" placeholder="e.g. Sydney AEST, Bengaluru IST, London BST" type="text"/>
+</div>
+</div>
+<div class="screening-panel" id="screeningPanel">
+<div class="pref-title">Screening required before attendance</div>
+<div class="pref-copy" id="screeningCopy">A trial or Benchmark Day place cannot be confirmed until the correct screening form has been completed, returned and accepted by V2Fitness.</div>
+<div class="screening-links">
+<a class="screening-link" data-form="adult" href="Adult-Pre-Screening-Tool-v1.pdf" download>Adults 18+ · Download APSS →</a>
+<a class="screening-link" data-form="child" href="Young_People_Pre-Exercise_Screening_Parent_v1.pdf" download>Ages 5–15 · Download Parent Form →</a>
+<a class="screening-link" data-form="youth" href="Young_People_Pre-Exercise_Screening_Young_Person_v1.pdf" download>Ages 16–17 · Download Young Person Form →</a>
+</div>
+<label class="choice-pill" style="align-items:flex-start;"><input id="screeningAcknowledgement" name="screening_acknowledgement" type="checkbox" value="Acknowledged"/><span>I understand that this request is not a confirmed booking and the correct screening form must be completed and accepted before attendance.</span></label>
+<div style="font-size:.68rem;color:var(--soft);line-height:1.45;margin-top:.65rem;">Please do not type private medical details into the general message box. Coach DG will confirm how to return the completed form securely.</div>
+</div>
 <div class="form-group">
 <label class="form-label">Tell us about your goals</label>
-<textarea class="form-textarea" name="message" placeholder="What are you hoping to achieve? Any health considerations or questions?"></textarea>
+<textarea class="form-textarea" name="message" placeholder="What would you or your family like to gain from V2Fitness? Any general questions for Coach DG?"></textarea>
 </div>
-<button class="form-submit" id="submitBtn" type="submit">Book My Free Consultation →</button>
+<button class="form-submit" id="submitBtn" type="submit">Send My Enquiry →</button>
 <p class="form-note">No spam. No pressure. We reply within 24 hours.</p>
 </form>
 <a class="wa-cta-bar" href="https://wa.me/61468323244?text=Hi%20Coach%20DG%2C%20I'd%20like%20to%20book%20a%20free%20trial%20at%20V2Fitness!" rel="noopener" target="_blank">
@@ -2509,6 +2670,8 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <li><a href="#youth">Kids &amp; Youth</a></li>
 <li><a href="#programs">Family Package</a></li>
 <li><a href="#camp">School Holiday Programs</a></li>
+<li><a href="#benchmark-day">FREE Benchmark Day</a></li>
+<li><a href="#online-classes">Online Classes — Upcoming</a></li>
 </ul>
 </div>
 <div class="footer-col">
@@ -2523,9 +2686,9 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <div class="footer-col">
 <h4>Connect</h4>
 <ul>
-<li><a href="#contact">Book Free Trial</a></li>
+<li><a href="#contact" onclick="selectInterest('FREE Trial Class — Adult or Youth')">Book Free Trial</a></li>
 <li><a href="https://wa.me/61468323244">💬 WhatsApp</a></li>
-<li><a href="mailto:dgv2fitness@gmail.com">Email Us</a></li>
+<li><a href="mailto:info@v2fitness.com.au">Email Us</a></li>
 <li><a href="#">Instagram</a></li>
 </ul>
 <div style="margin-top:1rem;font-size:0.72rem;color:rgba(255,255,255,0.2);">Springfield · Ipswich · Brisbane</div>
@@ -2542,7 +2705,7 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 50);
   // Highlight active nav section
-  const sections = ['home','about','programs','youth','camp','benchmarking','testimonials','contact'];
+  const sections = ['home','about','programs','youth','camp','benchmark-day','benchmarking','online-classes','testimonials','contact'];
   let current = '';
   sections.forEach(id => {
     const el = document.getElementById(id);
@@ -2572,21 +2735,100 @@ document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
 // ── Program countdown
 function updateCountdown() {
-  const target = new Date('2026-07-07T00:00:00');
+  const target = new Date('2026-09-19T00:00:00+10:00');
   const now = new Date();
   const diff = target - now;
   const el = document.getElementById('campDays');
   if (!el) return;
-  if (diff <= 0) { el.textContent = '🏕️ Program is on now!'; return; }
+  if (diff <= 0) {
+    const end = new Date('2026-10-05T23:59:59+10:00');
+    el.textContent = now <= end ? '🏕️ Term 3 school holidays are on now!' : 'Next holiday dates coming soon';
+    return;
+  }
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const weeks = Math.floor(days / 7);
   el.textContent = weeks > 0 ? `${days} days (${weeks} weeks) until program starts` : `${days} days until program starts`;
 }
 updateCountdown();
 
+// ── Conversion paths: booking, school holiday and online EOI
+function selectInterest(value) {
+  const select = document.getElementById('programInterest');
+  if (!select) return;
+  select.value = value;
+  updateInterestForm();
+}
+
+function updateInterestForm() {
+  const interest = document.getElementById('programInterest').value;
+  const isTrial = interest.includes('Trial Class');
+  const isBenchmark = interest.includes('Benchmark Day');
+  const isSchool = interest.includes('School Holiday');
+  const isOnline = interest.includes('Online Group Classes');
+  const needsScreening = isTrial || isBenchmark;
+  const needsParticipant = needsScreening || isSchool;
+  const needsSchedule = isSchool || isOnline;
+  const participantPanel = document.getElementById('participantPanel');
+  const schedulePanel = document.getElementById('schedulePanel');
+  const screeningPanel = document.getElementById('screeningPanel');
+  const participantType = document.getElementById('participantType');
+  const acknowledgement = document.getElementById('screeningAcknowledgement');
+  const timezone = document.querySelector('[name="online_location_timezone"]');
+
+  participantPanel.classList.toggle('is-visible', needsParticipant);
+  schedulePanel.classList.toggle('is-visible', needsSchedule);
+  screeningPanel.classList.toggle('is-visible', needsScreening);
+  participantType.required = needsParticipant;
+  acknowledgement.required = needsScreening;
+  timezone.required = isOnline;
+  document.getElementById('timezoneRow').style.display = isOnline ? 'block' : 'none';
+
+  document.querySelectorAll('.school-time').forEach(el => {
+    el.style.display = isSchool ? 'flex' : 'none';
+    if (!isSchool) el.querySelector('input').checked = false;
+  });
+  document.querySelectorAll('.online-time').forEach(el => {
+    el.style.display = isOnline ? 'flex' : 'none';
+    el.querySelector('input').checked = isOnline;
+  });
+  document.getElementById('scheduleTitle').textContent = isSchool
+    ? 'Help us build the Term 3 holiday timetable'
+    : 'Help us shape the online class schedule';
+  document.getElementById('scheduleCopy').textContent = isSchool
+    ? 'Select any days that work for your family, then choose 7:00–8:00 am, 8:00–9:00 am or both. The final school-holiday timetable will be confirmed from genuine family demand.'
+    : 'Select the days you would attend. All online options run from 5:30–6:30 am Brisbane time (AEST): Mon/Wed/Fri join the existing physical class live, while Tue/Thu/Sat/Sun are dedicated online-only options.';
+
+  if (!needsParticipant) participantType.value = '';
+  if (!needsScreening) acknowledgement.checked = false;
+  updateScreeningLinks();
+}
+
+function updateScreeningLinks() {
+  const type = document.getElementById('participantType').value;
+  document.querySelectorAll('.screening-link').forEach(link => {
+    const selected = !type || link.dataset.form === type;
+    link.style.display = selected ? 'block' : 'none';
+  });
+}
+
+function validateInterestForm() {
+  const interest = document.getElementById('programInterest').value;
+  const needsSchedule = interest.includes('School Holiday') || interest.includes('Online Group Classes');
+  if (!needsSchedule) return true;
+  const days = [...document.querySelectorAll('[name="preferred_days"]')].some(x => x.checked);
+  const times = [...document.querySelectorAll('[name="preferred_times"]')].some(x => x.checked && x.closest('label').style.display !== 'none');
+  if (!days || !times) {
+    alert('Please select at least one preferred day and one preferred time.');
+    document.getElementById('schedulePanel').scrollIntoView({behavior:'smooth',block:'center'});
+    return false;
+  }
+  return true;
+}
+
 // ── Form submit
 async function handleSubmit(e) {
   e.preventDefault();
+  if (!validateInterestForm()) return;
   const form = e.target;
   const btn  = document.getElementById('submitBtn');
   const data = new FormData(form);
@@ -2609,9 +2851,10 @@ async function handleSubmit(e) {
       btn.style.background = '#276749';
       btn.style.cursor = 'default';
       form.reset();
+      updateInterestForm();
       // Reset button after 6 seconds
       setTimeout(() => {
-        btn.textContent = 'Book My Free Consultation →';
+        btn.textContent = 'Send My Enquiry →';
         btn.style.background = '';
         btn.disabled = false;
         btn.style.cursor = 'pointer';

@@ -1354,6 +1354,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 .bmd-actions .btn-primary{font-size:.88rem;padding:.85rem 1.15rem;box-shadow:0 10px 24px rgba(19,138,91,.2)}
 .bmd-urgency{display:flex;align-items:center;gap:.65rem;margin-top:1rem;padding:.8rem .95rem;border-radius:12px;background:#FFD447;color:#12372A;font-weight:900;box-shadow:0 8px 22px rgba(255,212,71,.22)}
 .bmd-urgency strong{font-size:1.12rem}.bmd-urgency span{font-size:.72rem;line-height:1.4}
+.bmd-capacity{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-top:.8rem}.bmd-capacity-item{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:.75rem .85rem}.bmd-capacity-item .cap-label{display:block;font-size:.7rem;font-weight:800;color:rgba(255,255,255,.68);text-transform:uppercase;letter-spacing:.05em}.bmd-capacity-item .cap-value{display:block;margin-top:.15rem;font-size:.98rem;font-weight:950;color:#7CFFC4}.bmd-capacity-item.low .cap-value{color:#FFD447}.bmd-capacity-item.full .cap-value{color:#FFB4B4}.bmd-config-note{font-size:.68rem;color:rgba(255,255,255,.55);margin-top:.45rem}
 .preference-panel{display:none;padding:1.05rem;border:1px solid var(--green-pp);border-radius:14px;background:var(--green-p);margin-bottom:1rem}
 .preference-panel.is-visible{display:block}
 .pref-title{font-weight:900;color:var(--forest);font-size:.94rem;margin-bottom:.25rem}.pref-copy{font-size:.76rem;color:var(--mid);line-height:1.5;margin-bottom:.85rem}
@@ -1365,7 +1366,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 .online-section{background:linear-gradient(145deg,#E8F7FB,#fff 45%,#E9FFF4);position:relative;overflow:hidden}.online-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:1.4rem;align-items:center}.online-card{background:#fff;border:1px solid var(--green-pp);border-radius:var(--radius-l);padding:1.5rem;box-shadow:var(--shadow-m)}.online-points{display:grid;gap:.65rem;margin:1rem 0}.online-point{display:flex;gap:.65rem;align-items:flex-start;font-size:.82rem;line-height:1.5;color:var(--mid)}.online-point b{color:var(--forest)}.online-badge{display:inline-flex;background:#2B6CB0;color:#fff;border-radius:999px;padding:.45rem .8rem;font-size:.7rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
 @media(max-width:900px){#benchmark-day:after{display:none}.bmd-card.primary{transform:none}}
 
-@media(max-width:900px){.bmd-grid,.online-grid{grid-template-columns:1fr}.bmd-times{grid-template-columns:1fr}}
+@media(max-width:900px){.bmd-grid,.online-grid{grid-template-columns:1fr}.bmd-times,.bmd-capacity{grid-template-columns:1fr}}
 
 </style>
 <meta content="#12372A" name="theme-color"/><meta content="index,follow,max-image-preview:large" name="robots"/><link href="/assets/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/assets/site.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="V2Fitness" property="og:site_name"/><meta content="en_AU" property="og:locale"/><meta content="summary" name="twitter:card"/><meta content="V2Fitness | Kids, Youth &amp; Family Fitness in Springfield" name="twitter:title"/><meta content="V2Fitness provides evidence-informed outdoor fitness for kids, youth and families, with privacy-first Youth OS growth and maturation tools." name="twitter:description"/></head>
@@ -2298,7 +2299,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <section class="section" id="benchmark-day">
   <div class="container">
     <div class="bmd-head reveal">
-      <div class="bmd-alert"><span class="bmd-alert-dot"></span> Registrations open · only 10 free community places</div><br/>
+      <div class="bmd-alert"><span class="bmd-alert-dot"></span> Registrations open · 10 FREE adult + 10 FREE kids/youth places</div><br/>
       <span class="eyebrow eyebrow-amber">📊 Community Assessment &amp; Benchmarking</span>
       <h2 class="title">Know your starting point.<br/><em>Measure your progress.</em></h2>
       <p class="lead" style="margin:0 auto;">A welcoming, coach-led fitness check for local adults, kids and families. Understand your starting point across key fitness qualities, receive meaningful context and leave with a clearer direction—not a judgement or comparison.</p>
@@ -2308,7 +2309,11 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
         <div style="font-size:.72rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:#7CFFC4;">Next Benchmark Day</div>
         <div class="bmd-date">Sunday, 13 September 2026</div>
         <div class="bmd-meta">Silver Jubilee Park · Springfield<br/>A structured benchmark morning repeated every 6 weeks.</div>
-        <div class="bmd-urgency"><strong>10 FREE SPOTS</strong><span>First confirmed community bookings only. Screening and coach confirmation are required.</span></div>
+        <div class="bmd-urgency"><strong>20 FREE PLACES</strong><span>10 Adults + 10 Kids/Youth. First confirmed bookings only. Screening and coach confirmation are required.</span></div>
+        <div class="bmd-capacity">
+          <div class="bmd-capacity-item" id="adultCapacityCard"><span class="cap-label">Adults · 7:00–8:00 am</span><span class="cap-value" id="adultAvailability">10 of 10 FREE places available</span></div>
+          <div class="bmd-capacity-item" id="youthCapacityCard"><span class="cap-label">Kids &amp; Youth · 8:00–9:00 am</span><span class="cap-value" id="youthAvailability">10 of 10 FREE places available</span></div>
+        </div>
         <div class="bmd-times">
           <div class="bmd-time"><strong>Adults · 7:00–8:00 am</strong><span>Baseline and progress assessments for adults.</span></div>
           <div class="bmd-time"><strong>Kids &amp; Youth · 8:00–9:00 am</strong><span>Age-appropriate benchmarking for children and young athletes.</span></div>
@@ -2321,12 +2326,12 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
         <ul class="bmd-list">
           <li>V2Fitness members and their children receive first preference.</li>
           <li>Remaining capacity is then opened to the community.</li>
-          <li>Only 10 complimentary community places are available for the 13 September event.</li>
+          <li>For 13 September: 10 complimentary Adult places and 10 complimentary Kids/Youth places are available, subject to screening and confirmation.</li>
           <li>Results can be used as a baseline and compared again at future 6-week benchmark sessions.</li>
         </ul>
         <div class="bmd-apss"><strong>APSS pre-screening is mandatory before attendance.</strong><br/>Adults must complete the required pre-exercise screening before their booking is confirmed. For kids/youth, the parent or guardian must complete the relevant screening and consent. A registration request is not a confirmed place until screening is complete and accepted by V2Fitness.</div>
         <div class="bmd-actions">
-          <a class="btn btn-primary" href="#contact" onclick="selectInterest('FREE Community Benchmark Day — 13 Sep 2026')">Reserve One of 10 FREE Places →</a>
+          <a class="btn btn-primary" href="#contact" onclick="selectInterest('FREE Community Benchmark Day — 13 Sep 2026')">Reserve My FREE Benchmark Spot →</a>
           <a class="btn btn-outline" href="#contact">Ask a Question</a>
         </div>
         <p style="font-size:.7rem;color:var(--soft);margin-top:.8rem;">*A request does not guarantee a place. Date, times, format and availability may change due to weather, venue access, participant safety, minimum registrations or operational requirements. V2Fitness will notify registered participants of material changes.</p>
@@ -2887,5 +2892,48 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
+
+<!-- =========================================================
+     V2FITNESS BENCHMARK DAY CONFIGURATION
+     For future Benchmark Days, update ONLY the values below.
+     This is CURRENT availability (manual), not a live booking counter.
+========================================================== -->
+<script>
+const benchmarkEvent = {
+  active: true,
+  date: "13 September 2026",
+  location: "Silver Jubilee Park · Springfield",
+  adult: { time: "7:00–8:00 am", capacity: 10, remaining: 10 },
+  youth: { time: "8:00–9:00 am", capacity: 10, remaining: 10 }
+};
+
+function renderBenchmarkAvailability() {
+  const groups = [
+    {key:'adult', valueId:'adultAvailability', cardId:'adultCapacityCard'},
+    {key:'youth', valueId:'youthAvailability', cardId:'youthCapacityCard'}
+  ];
+  groups.forEach(({key,valueId,cardId}) => {
+    const item = benchmarkEvent[key];
+    const el = document.getElementById(valueId);
+    const card = document.getElementById(cardId);
+    if (!el || !card) return;
+    card.classList.remove('low','full');
+    if (item.remaining <= 0) {
+      el.textContent = 'FULL · Ask about the waitlist';
+      card.classList.add('full');
+    } else if (item.remaining === 1) {
+      el.textContent = 'LAST FREE PLACE';
+      card.classList.add('low');
+    } else if (item.remaining <= 3) {
+      el.textContent = `Only ${item.remaining} FREE places remaining`;
+      card.classList.add('low');
+    } else {
+      el.textContent = `${item.remaining} of ${item.capacity} FREE places available`;
+    }
+  });
+}
+renderBenchmarkAvailability();
+</script>
+
 </body>
 </html>

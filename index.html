@@ -2311,8 +2311,8 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
         <div class="bmd-meta">Silver Jubilee Park · Springfield<br/>A structured benchmark morning repeated every 6 weeks.</div>
         <div class="bmd-urgency"><strong>20 FREE PLACES</strong><span>10 Adults + 10 Kids/Youth. First confirmed bookings only. Screening and coach confirmation are required.</span></div>
         <div class="bmd-capacity">
-          <div class="bmd-capacity-item" id="adultCapacityCard"><span class="cap-label">Adults · 7:00–8:00 am</span><span class="cap-value" id="adultAvailability">10 of 10 FREE places available</span></div>
-          <div class="bmd-capacity-item" id="youthCapacityCard"><span class="cap-label">Kids &amp; Youth · 8:00–9:00 am</span><span class="cap-value" id="youthAvailability">10 of 10 FREE places available</span></div>
+          <div class="bmd-capacity-item" id="adultCapacityCard"><span class="cap-label">Adults · 7:00–8:00 am</span><span class="cap-value" id="adultAvailability">9 of 10 FREE places available</span></div>
+          <div class="bmd-capacity-item" id="youthCapacityCard"><span class="cap-label">Kids &amp; Youth · 8:00–9:00 am</span><span class="cap-value" id="youthAvailability">8 of 10 FREE places available</span></div>
         </div>
         <div class="bmd-times">
           <div class="bmd-time"><strong>Adults · 7:00–8:00 am</strong><span>Baseline and progress assessments for adults.</span></div>
@@ -2326,7 +2326,7 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
         <ul class="bmd-list">
           <li>V2Fitness members and their children receive first preference.</li>
           <li>Remaining capacity is then opened to the community.</li>
-          <li>For 13 September: 10 complimentary Adult places and 10 complimentary Kids/Youth places are available, subject to screening and confirmation.</li>
+          <li>For 13 September: up to 10 complimentary Adult places and 10 complimentary Kids/Youth places are offered. Current remaining availability is shown on this page and all places are subject to screening and coach confirmation.</li>
           <li>Results can be used as a baseline and compared again at future 6-week benchmark sessions.</li>
         </ul>
         <div class="bmd-apss"><strong>APSS pre-screening is mandatory before attendance.</strong><br/>Adults must complete the required pre-exercise screening before their booking is confirmed. For kids/youth, the parent or guardian must complete the relevant screening and consent. A registration request is not a confirmed place until screening is complete and accepted by V2Fitness.</div>
@@ -2621,9 +2621,9 @@ body{background:linear-gradient(180deg,#fff 0%,#fffaf1 45%,#f4fff8 100%);}
 <div class="pref-title">Screening required before attendance</div>
 <div class="pref-copy" id="screeningCopy">A trial or Benchmark Day place cannot be confirmed until the correct screening form has been completed, returned and accepted by V2Fitness.</div>
 <div class="screening-links">
-<a class="screening-link" data-form="adult" href="Adult-Pre-Screening-Tool-v1.pdf" download>Adults 18+ · Download APSS →</a>
-<a class="screening-link" data-form="child" href="Young_People_Pre-Exercise_Screening_Parent_v1.pdf" download>Ages 5–15 · Download Parent Form →</a>
-<a class="screening-link" data-form="youth" href="Young_People_Pre-Exercise_Screening_Young_Person_v1.pdf" download>Ages 16–17 · Download Young Person Form →</a>
+<a class="screening-link" data-form="adult" href="/adult-pre-screening-tool-v1.pdf" target="_blank" rel="noopener">Adults 18+ · Download APSS →</a>
+<a class="screening-link" data-form="child" href="/young_people_pre-exercise_screening_parent_v1.pdf" target="_blank" rel="noopener">Ages 5–15 · Download Parent Form →</a>
+<a class="screening-link" data-form="youth" href="/young_people_pre-exercise_screening_young_person_v1.pdf" target="_blank" rel="noopener">Ages 16–17 · Download Young Person Form →</a>
 </div>
 <label class="choice-pill" style="align-items:flex-start;"><input id="screeningAcknowledgement" name="screening_acknowledgement" type="checkbox" value="Acknowledged"/><span>I understand that this request is not a confirmed booking and the correct screening form must be completed and accepted before attendance.</span></label>
 <div style="font-size:.68rem;color:var(--soft);line-height:1.45;margin-top:.65rem;">Please do not type private medical details into the general message box. Coach DG will confirm how to return the completed form securely.</div>
@@ -2903,8 +2903,8 @@ const benchmarkEvent = {
   active: true,
   date: "13 September 2026",
   location: "Silver Jubilee Park · Springfield",
-  adult: { time: "7:00–8:00 am", capacity: 10, remaining: 10 },
-  youth: { time: "8:00–9:00 am", capacity: 10, remaining: 10 }
+  adult: { time: "7:00–8:00 am", capacity: 10, remaining: 9 },
+  youth: { time: "8:00–9:00 am", capacity: 10, remaining: 8 }
 };
 
 function renderBenchmarkAvailability() {

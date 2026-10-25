@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8" content="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Growth Spurt &amp; PHV Estimator | V2 Youth OS</title>
+<meta content="Estimate possible timing before or after Peak Height Velocity using the Mirwald maturity-offset method and careful sitting-height measurement." name="description"/>
+<link href="https://v2fitness.com.au/youth-os/growth-spurt-estimator/" rel="canonical"/>
+<style>
+:root{--forest:#12372A;--green:#138A5B;--mint:#10B981;--orange:#F97316;--sun:#FFD447;--ink:#17202A;--mid:#4A5568;--soft:#718096;--line:#E2E8F0;--off:#F8FAFC}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(180deg,#ECFFF6,#fff 36%);color:var(--ink);line-height:1.6}
+a{text-decoration:none;color:inherit}.top{background:linear-gradient(135deg,#0F2530,var(--forest));color:#fff;padding:14px 5vw;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:800}.brand span{color:#7CFFC4}.top a{font-size:12px;color:rgba(255,255,255,.8)}
+.early{background:linear-gradient(90deg,var(--sun),#F4B64A);text-align:center;padding:8px;font-size:11px;font-weight:900;color:var(--forest)}
+.wrap{max-width:900px;margin:auto;padding:42px 20px 70px}.hero{text-align:center;max-width:760px;margin:auto}.tag{display:inline-flex;background:#FFF4E6;color:#B64708;border:1px solid #FDBA74;border-radius:999px;padding:5px 10px;font-size:10px;font-weight:900;letter-spacing:.08em}
+h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.06;margin:16px 0 12px;color:var(--forest)}.hero p{color:var(--mid);font-size:15px}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0}.why div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;font-size:12px;color:var(--mid)}.why strong{display:block;color:var(--forest);margin-bottom:4px}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 55px rgba(18,55,42,.10);margin-top:22px}.section-title{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--green);font-weight:900;margin:16px 0 8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:11px;font-weight:800;color:var(--forest);margin-bottom:5px}.field input,.field select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:14px}.hint{font-size:10px;color:var(--soft);margin-top:4px}
+.measure{background:#FFF4E6;border-left:5px solid var(--orange);border-radius:12px;padding:14px;margin:14px 0;font-size:11px;color:#70421F}
+button{width:100%;border:0;border-radius:999px;padding:14px;background:linear-gradient(135deg,var(--forest),var(--green));color:#fff;font-weight:900;font-size:14px;cursor:pointer;margin-top:18px}
+.error{display:none;background:#FEE2E2;color:#991B1B;border-radius:10px;padding:12px;margin-top:12px;font-size:12px}.result{display:none;margin-top:22px}.result.show{display:block}.result-main{background:linear-gradient(135deg,#0F2530,var(--forest));color:#fff;border-radius:18px;padding:22px;text-align:center}.result-main .big{font-size:2.2rem;font-weight:900;color:var(--sun)}.result-main p{font-size:12px;color:rgba(255,255,255,.75)}
+.context{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.context div{background:var(--off);border:1px solid var(--line);border-radius:12px;padding:13px;font-size:12px;color:var(--mid)}.context strong{display:block;color:var(--forest)}
+.disclaimer{background:#FFF4E6;border-left:5px solid var(--orange);border-radius:12px;padding:14px;margin-top:16px;font-size:11px;color:#70421F}
+.privacy{background:#ECFFF6;border:1px solid #BDF7DA;border-radius:12px;padding:14px;margin-top:12px;font-size:11px;color:#047857}
+.module-link{text-align:center;margin-top:22px}.module-link a{display:inline-flex;background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:999px;font-size:11px;font-weight:800;color:var(--forest)}
+footer{text-align:center;padding:26px;font-size:11px;color:var(--soft)}
+@media(max-width:700px){.grid,.why,.context{grid-template-columns:1fr}}
+
+.age-output{display:none;align-items:center;justify-content:space-between;gap:10px;background:#ECFFF6;border:1px solid #9FE7C6;border-radius:10px;padding:10px 12px;margin-top:6px;font-size:11px;color:#047857}
+.age-output.show{display:flex}.age-output.bad{background:#FEE2E2;border-color:#FCA5A5;color:#991B1B}
+.consent-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;margin-top:18px}
+.consent-card.complete{border-color:var(--green)}
+.consent-card h3{font-size:13px;color:var(--forest);margin:0 0 5px}.consent-card>p{font-size:11px;color:var(--mid);margin:0 0 10px}
+.consent-item{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;padding:11px 0;display:flex;align-items:flex-start;gap:10px;text-align:left;font:inherit;cursor:pointer}
+.consent-item:last-of-type{border-bottom:0}.consent-box{width:19px;height:19px;border:1.5px solid var(--soft);border-radius:5px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+.consent-item.checked .consent-box{background:var(--green);border-color:var(--green)}.consent-box:after{content:'✓';color:#fff;font-size:12px;font-weight:900;opacity:0}.consent-item.checked .consent-box:after{opacity:1}
+.consent-copy{font-size:11px;color:var(--mid);line-height:1.55}.consent-copy strong{color:var(--forest)}
+button.primary:disabled{background:#B8C9BF;cursor:not-allowed}.submit-hint{text-align:center;font-size:10px;color:var(--soft);margin-top:7px}
+
+
+.imported-profile{display:none;background:linear-gradient(135deg,#ECFFF6,#fff);border:1px solid #9FE7C6;border-radius:15px;padding:15px 16px;margin:14px 0}
+.imported-profile.show{display:block}.imported-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.imported-title{font-size:12px;font-weight:900;color:var(--forest)}.imported-badge{font-size:9px;font-weight:900;letter-spacing:.06em;background:#D1FAE5;color:#047857;padding:4px 7px;border-radius:999px}
+.imported-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:11px}
+.imported-item{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px;font-size:10px;color:var(--soft)}
+.imported-item strong{display:block;font-size:11px;color:var(--forest);margin-top:2px}
+.edit-import{border:0;background:transparent;color:var(--green);font-size:10px;font-weight:900;cursor:pointer;padding:5px}
+.core-fields.hidden-by-import{display:none}
+.sitting-guide{display:grid;grid-template-columns:210px 1fr;gap:18px;align-items:center;background:#FFF9F2;border:1px solid #FDBA74;border-radius:16px;padding:16px;margin:15px 0}
+.sitting-guide svg{width:100%;height:auto;display:block}.sitting-guide h3{font-size:13px;color:#7C2D12;margin:0 0 7px}
+.sitting-guide ol{margin:0;padding-left:18px;font-size:11px;color:#70421F;line-height:1.65}
+.sitting-guide-note{font-size:10px;color:#9A5A2A;margin-top:7px}
+.only-needed{display:none;background:#ECFFF6;border:1px solid #9FE7C6;border-radius:10px;padding:9px 11px;font-size:11px;color:#047857;margin:10px 0}
+.only-needed.show{display:block}
+@media(max-width:700px){.imported-grid{grid-template-columns:1fr 1fr}.sitting-guide{grid-template-columns:1fr}.sitting-guide svg{max-width:240px;margin:auto}}
+
+
+.profile-required{display:none;background:#FFF4E6;border:1px solid #FDBA74;border-left:5px solid var(--orange);border-radius:14px;padding:16px;margin:14px 0;color:#7C2D12}
+.profile-required.show{display:block}.profile-required h3{font-size:13px;margin:0 0 5px}.profile-required p{font-size:11px;margin:0 0 10px;line-height:1.6}
+.profile-required a{display:inline-flex;background:var(--orange);color:#fff;border-radius:999px;padding:9px 13px;font-size:11px;font-weight:900}
+.profile-value-name{text-transform:none}
+
+</style>
+<meta content="#12372A" name="theme-color"/><meta content="index,follow,max-image-preview:large" name="robots"/><link href="/assets/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/assets/site.webmanifest" rel="manifest"/><meta content="website" property="og:type"/><meta content="V2Fitness" property="og:site_name"/><meta content="Growth Spurt &amp; PHV Estimator | V2 Youth OS" property="og:title"/><meta content="Estimate possible timing before or after Peak Height Velocity using the Mirwald maturity-offset method and careful sitting-height measurement." property="og:description"/><meta content="https://v2fitness.com.au/youth-os/growth-spurt-estimator/" property="og:url"/><meta content="en_AU" property="og:locale"/><meta content="summary" name="twitter:card"/><meta content="Growth Spurt &amp; PHV Estimator | V2 Youth OS" name="twitter:title"/><meta content="Estimate possible timing before or after Peak Height Velocity using the Mirwald maturity-offset method and careful sitting-height measurement." name="twitter:description"/></head>
+<body>
+<div class="top"><div class="brand">V2 <span>Youth OS</span></div><div><a href="/youth-os/">Youth OS Home</a> · <a href="/">V2Fitness</a></div></div>
+<div class="early">MODULE 02 · FREE EARLY ACCESS · NO ACCOUNT REQUIRED</div>
+<main class="wrap">
+<div class="hero">
+<span class="tag">GROWTH-SPURT TIMING</span>
+<h1>Growth Spurt &amp; PHV Estimator</h1>
+<p>Estimate possible timing before or after Peak Height Velocity using the Mirwald anthropometric maturity-offset method. This is a separate module because PHV timing and adult-height estimation answer different questions.</p>
+</div>
+<div class="why">
+<div><strong>Why it may help</strong>Adds growth context to coaching, movement and workload conversations.</div>
+<div><strong>What it does not do</strong>It does not diagnose puberty, skeletal age, injury or readiness.</div>
+<div><strong>What matters most</strong>Pain, health, movement, workload, sleep and qualified judgement remain essential.</div>
+</div>
+<section class="card">
+<div class="section-title">Child details</div>
+<div class="imported-profile" id="importedProfile">
+<div class="imported-head">
+<div class="imported-title">✓ Child details carried over from Module 01</div>
+<div>
+<span class="imported-badge">THIS BROWSER SESSION</span>
+<a class="edit-import" href="/youth-os/adult-height-estimator/">Edit in Module 01</a>
+</div>
+</div>
+<div class="imported-grid" style="grid-template-columns:repeat(3,1fr)">
+<div class="imported-item">Name<strong class="profile-value-name" id="importName">—</strong></div>
+<div class="imported-item">Sex<strong id="importSex">—</strong></div>
+<div class="imported-item">Date of birth<strong id="importDob">—</strong></div>
+<div class="imported-item">Exact age<strong id="importAge">—</strong></div>
+<div class="imported-item">Standing height<strong id="importHeight">—</strong></div>
+<div class="imported-item">Weight<strong id="importWeight">—</strong></div>
+</div>
+</div>
+<div class="profile-required" id="profileRequired">
+<h3>Complete Module 01 first</h3>
+<p>Module 02 reuses the child's name, sex, date of birth, standing height and weight from the Adult Height Estimator. This avoids asking you to enter the same details twice.</p>
+<a href="/youth-os/adult-height-estimator/">Go to Module 01 →</a>
+</div>
+<div class="only-needed" id="onlyNeeded">Your Module 01 details are already loaded. Enter only <strong>sitting height</strong>, select measurement quality and confirm the statements below.</div>
+<div class="grid">
+<div class="field"><label>Sitting height (cm)</label><input id="sitting" placeholder="e.g. 88.0" step="0.1" type="number"/><div class="hint">Measure vertically from the sitting surface to the top of the head.</div></div>
+<div class="field"><label>Measurement quality</label><select id="quality"><option value="good">Measured carefully today</option><option value="rough">Approximate or older measurement</option></select></div>
+</div>
+<div class="sitting-guide">
+<svg aria-labelledby="sitTitle sitDesc" role="img" viewbox="0 0 260 230">
+<title id="sitTitle">How to measure sitting height</title>
+<desc id="sitDesc">A child sits upright on a firm box against a wall. A vertical arrow measures from the top of the box to the top of the head.</desc>
+<rect fill="#CBD5E1" height="198" rx="3" width="8" x="18" y="12"></rect>
+<line stroke="#94A3B8" stroke-width="5" x1="22" x2="245" y1="210" y2="210"></line>
+<rect fill="#D6A46D" height="60" rx="5" stroke="#8A5A2B" stroke-width="3" width="92" x="70" y="150"></rect>
+<circle cx="126" cy="52" fill="#F2C7A5" r="25" stroke="#12372A" stroke-width="3"></circle>
+<path d="M106 78 Q126 68 145 82 L151 143 L101 143 Z" fill="#10B981" stroke="#12372A" stroke-width="3"></path>
+<path d="M104 95 L75 132" stroke="#12372A" stroke-linecap="round" stroke-width="9"></path>
+<path d="M145 96 L166 133" stroke="#12372A" stroke-linecap="round" stroke-width="9"></path>
+<path d="M111 143 L108 151" stroke="#12372A" stroke-linecap="round" stroke-width="10"></path>
+<path d="M139 143 L141 151" stroke="#12372A" stroke-linecap="round" stroke-width="10"></path>
+<line stroke="#12372A" stroke-width="3" x1="126" x2="126" y1="27" y2="13"></line>
+<line stroke="#12372A" stroke-width="4" x1="95" x2="157" y1="26" y2="26"></line>
+<line stroke="#F97316" stroke-width="5" x1="209" x2="209" y1="150" y2="28"></line>
+<path d="M209 22 l-9 14 h18 z" fill="#F97316"></path>
+<path d="M209 156 l-9 -14 h18 z" fill="#F97316"></path>
+<line stroke="#F97316" stroke-dasharray="5 5" stroke-width="3" x1="162" x2="222" y1="150" y2="150"></line>
+<line stroke="#F97316" stroke-dasharray="5 5" stroke-width="3" x1="157" x2="222" y1="26" y2="26"></line>
+<text fill="#B64708" font-size="13" font-weight="800" transform="rotate(90 219 92)" x="219" y="92">SITTING HEIGHT</text>
+<text fill="#475569" font-size="11" font-weight="700" x="40" y="225">Firm box • back upright • head level</text>
+</svg>
+<div>
+<h3>How to measure sitting height</h3>
+<ol>
+<li>Place a firm, flat box or bench against a wall.</li>
+<li>Have the child sit tall, looking straight ahead, with the back upright.</li>
+<li>Keep the thighs supported and feet still.</li>
+<li>Measure vertically from the sitting surface to the highest point of the head.</li>
+<li>Measure twice and use the closest repeatable value.</li>
+</ol>
+<div class="sitting-guide-note">Do not measure from the floor. The box or bench height must be excluded.</div>
+</div>
+</div>
+<div class="consent-card" id="phvConsentCard">
+<h3>🔒 Before you continue</h3>
+<p>This educational tool is for parents and guardians. Please confirm all three statements.</p>
+<button aria-checked="false" class="consent-item" id="p1" onclick="togglePhvConsent('p1')" role="checkbox" type="button">
+<span class="consent-box"></span><span class="consent-copy">I am the <strong>parent or legal guardian</strong>, or I am over 18 and have the guardian's permission to enter these measurements.</span>
+</button>
+<button aria-checked="false" class="consent-item" id="p2" onclick="togglePhvConsent('p2')" role="checkbox" type="button">
+<span class="consent-box"></span><span class="consent-copy">I understand this is a <strong>statistical estimate, not medical advice</strong>, diagnosis, skeletal-age assessment, puberty assessment or guarantee.</span>
+</button>
+<button aria-checked="false" class="consent-item" id="p3" onclick="togglePhvConsent('p3')" role="checkbox" type="button">
+<span class="consent-box"></span><span class="consent-copy">I understand Mirwald maturity offset has <strong>meaningful individual error</strong> and must not be used alone for training load, injury, talent-selection or return-to-sport decisions.</span>
+</button>
+<div class="privacy">🛡️ The calculation runs in this browser. V2Fitness does not collect or store the date of birth, measurements or result.</div>
+</div>
+<button class="primary" disabled="" id="phvSubmit" onclick="calculate()" type="button">Estimate PHV Timing</button>
+<div class="submit-hint" id="phvSubmitHint">Please confirm all three statements above to continue</div>
+<div class="error" id="error"></div>
+<div class="result" id="result">
+<div class="result-main">
+<div style="font-size:12px;font-weight:800">Estimated maturity offset</div>
+<div class="big" id="offset">—</div>
+<p id="meaning">—</p>
+</div>
+<div class="context">
+<div><strong>Estimated age at PHV</strong><span id="agePhv">—</span></div>
+<div><strong>Measurement confidence</strong><span id="qualityText">—</span></div>
+<div><strong>General interpretation</strong><span id="stage">—</span></div>
+<div><strong>Next step</strong>Repeat accurate measurements over time and discuss concerns with an appropriate professional.</div>
+</div>
+<div class="disclaimer"><strong>Important:</strong> Typical individual error can be substantial, and predicted age at PHV can vary by age and population. Do not use this result alone to prescribe training load, diagnose maturity, select talent or make return-to-sport decisions.</div>
+</div>
+<div class="privacy">🔒 All measurements and results remain in this browser. V2Fitness does not collect, transmit or store them.</div>
+</section>
+<div class="module-link"><a href="/youth-os/adult-height-estimator/">← Module 01: Adult Height Estimator</a></div>
+</main>
+<footer>Mirwald et al., Med Sci Sports Exerc. 2002;34:689–694 · Educational use only</footer>
+<script>
+function $(id){return document.getElementById(id)}
+function round1(n){return Math.round(n*10)/10}
+
+var phvConsent={p1:false,p2:false,p3:false};
+
+var importedProfileActive=false;
+var moduleOneProfile=null;
+
+function formatDobForDisplay(dobStr){
+  var d=new Date(dobStr+'T00:00:00');
+  if(isNaN(d.getTime())) return dobStr;
+  return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+}
+
+function loadModuleOneProfile(){
+  try{
+    var raw=sessionStorage.getItem('v2YouthGrowthProfile');
+    if(!raw) throw new Error('No Module 01 profile');
+
+    var p=JSON.parse(raw);
+    if(!p || !p.dob || !p.sex || !Number.isFinite(Number(p.standingHeightCm)) || !Number.isFinite(Number(p.weightKg))){
+      throw new Error('Incomplete Module 01 profile');
+    }
+
+    moduleOneProfile={
+      name:(p.name || '').trim(),
+      sex:p.sex,
+      dob:p.dob,
+      standingHeightCm:Number(p.standingHeightCm),
+      weightKg:Number(p.weightKg)
+    };
+
+    $('importName').textContent=moduleOneProfile.name || 'Not provided';
+    $('importSex').textContent=moduleOneProfile.sex==='male'?'Male':'Female';
+    $('importDob').textContent=formatDobForDisplay(moduleOneProfile.dob);
+    $('importAge').textContent=ageLabel(moduleOneProfile.dob)+' ('+decimalAgeFromDob(moduleOneProfile.dob).toFixed(2)+' years)';
+    $('importHeight').textContent=moduleOneProfile.standingHeightCm.toFixed(1)+' cm';
+    $('importWeight').textContent=moduleOneProfile.weightKg.toFixed(1)+' kg';
+
+    $('importedProfile').classList.add('show');
+    $('profileRequired').classList.remove('show');
+    $('onlyNeeded').classList.add('show');
+    importedProfileActive=true;
+  }catch(e){
+    moduleOneProfile=null;
+    importedProfileActive=false;
+    $('importedProfile').classList.remove('show');
+    $('onlyNeeded').classList.remove('show');
+    $('profileRequired').classList.add('show');
+    $('phvSubmit').disabled=true;
+    $('phvSubmitHint').textContent='Complete Module 01 first, then return to this module';
+  }
+}
+
+
+function decimalAgeFromDob(dobStr){
+  if(!dobStr) return null;
+  var dob=new Date(dobStr+'T00:00:00');
+  var now=new Date();
+  if(isNaN(dob.getTime()) || dob>now) return null;
+  return (now-dob)/(1000*60*60*24*365.25);
+}
+
+function ageLabel(dobStr){
+  var dob=new Date(dobStr+'T00:00:00'), now=new Date();
+  var y=now.getFullYear()-dob.getFullYear();
+  var m=now.getMonth()-dob.getMonth();
+  if(now.getDate()<dob.getDate()) m--;
+  if(m<0){y--;m+=12}
+  return y+' year'+(y===1?'':'s')+(m?', '+m+' month'+(m===1?'':'s'):'');
+}
+
+function updatePhvAge(){
+  var dob=$('dob').value, age=decimalAgeFromDob(dob), box=$('phvAgeOutput');
+  box.classList.remove('show','bad');
+  if(age===null) return;
+  box.classList.add('show');
+  $('phvAgeText').textContent=ageLabel(dob);
+  $('phvAgeDecimal').textContent=age.toFixed(2)+' years';
+  if(age<7 || age>18){
+    box.classList.add('bad');
+    $('phvAgeText').textContent=ageLabel(dob)+' — outside this tool’s accepted age range';
+  }
+}
+
+function togglePhvConsent(id){
+  phvConsent[id]=!phvConsent[id];
+  var item=$(id);
+  item.classList.toggle('checked',phvConsent[id]);
+  item.setAttribute('aria-checked',phvConsent[id]?'true':'false');
+  refreshPhvSubmit();
+}
+function phvConsentComplete(){return phvConsent.p1&&phvConsent.p2&&phvConsent.p3}
+function refreshPhvSubmit(){
+  var ok=phvConsentComplete() && importedProfileActive;
+  $('phvSubmit').disabled=!ok;
+  $('phvConsentCard').classList.toggle('complete',ok);
+  $('phvSubmitHint').style.display=ok?'none':'block';
+  if(!importedProfileActive){
+    $('phvSubmitHint').textContent='Complete Module 01 first, then return to this module';
+  }else if(!phvConsentComplete()){
+    $('phvSubmitHint').textContent='Please confirm all three statements above to continue';
+  }
+}
+
+function calculate(){
+  if(!moduleOneProfile) return fail('Please complete Module 01 first so the child details can be carried into this assessment.');
+
+  var sex=moduleOneProfile.sex;
+  var dob=moduleOneProfile.dob;
+  var age=decimalAgeFromDob(dob);
+  var sh=moduleOneProfile.standingHeightCm;
+  var wt=moduleOneProfile.weightKg;
+  var sit=parseFloat($('sitting').value);
+  var q=$('quality').value;
+  var err=$('error');
+  err.style.display='none';
+
+  function fail(msg){err.textContent=msg;err.style.display='block';return}
+
+  if(!phvConsentComplete()) return fail('Please confirm all three statements before continuing.');
+  if(!sex || age===null || !Number.isFinite(sh) || !Number.isFinite(wt) || !Number.isFinite(sit)){
+    return fail('Please complete date of birth, sex and all measurements.');
+  }
+  if(age<7 || age>18 || sh<100 || sh>220 || wt<20 || wt>150 || sit<50 || sit>=sh){
+    return fail('One or more values look outside the accepted range. Please check them.');
+  }
+
+  var leg=sh-sit, whr=(wt/sh)*100, off;
+  if(sex==='male'){
+    off=-9.236+(0.0002708*leg*sit)+(-0.001663*age*leg)+(0.007216*age*sit)+(0.02292*whr);
+  }else{
+    off=-9.376+(0.0001882*leg*sit)+(0.0022*age*leg)+(0.005841*age*sit)+(-0.002658*age*wt)+(0.07693*whr);
+  }
+
+  var ageAt=age-off, meaning, stage;
+  if(off<-1){meaning=Math.abs(round1(off))+' years before estimated PHV';stage='Likely before the fastest growth period';}
+  else if(off<-0.25){meaning=Math.abs(round1(off))+' years before estimated PHV';stage='Approaching the growth-spurt period';}
+  else if(off<=0.5){meaning='Around estimated PHV';stage='Possibly near the fastest growth period';}
+  else{meaning=round1(off)+' years after estimated PHV';stage='Likely after the fastest growth period';}
+
+  $('offset').textContent=(off>0?'+':'')+round1(off)+' years';
+  $('meaning').textContent=meaning;
+  $('agePhv').textContent=round1(ageAt)+' years';
+  $('qualityText').textContent=q==='good'?'Better input quality — equation limitations still apply':'Low — repeat with accurate current measurements';
+  $('stage').textContent=stage;
+  $('result').classList.add('show');
+  $('result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  loadModuleOneProfile();
+  refreshPhvSubmit();
+});
+</script>
+</body>
+</html>

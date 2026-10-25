@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head>
+<meta charset="utf-8" content="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Adult Height Estimator | V2 Youth OS</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --forest:#1B3A2D; --mid:#2C5F47; --accent:#4CAF82; --accent-lt:#7ECFA4;
+  --bg:#F7F4EF; --card:#FFF; --card-tint:#EEF7F2; --border:#D6E8DE;
+  --text:#1B3A2D; --text2:#4A6B58; --text3:#7A9A88;
+  --amber:#E8960A; --amber-bg:#FEF7E6; --red:#C0392B; --red-bg:#FDECEA;
+  --radius:12px; --radius-lg:20px;
+  --shadow:0 2px 12px rgba(27,58,45,.08);
+  --font-display:'Space Grotesk',sans-serif; --font-body:'Inter',sans-serif;
+}
+html { scroll-behavior:smooth; }
+body { font-family:var(--font-body); background:var(--bg); color:var(--text); min-height:100vh; line-height:1.55; }
+.page { max-width:640px; margin:0 auto; padding:0 20px 80px; }
+
+.site-header { background:var(--forest); padding:0 20px; display:flex; align-items:center; justify-content:space-between; height:60px; position:sticky; top:0; z-index:100; }
+.logo { font-family:var(--font-display); font-size:15px; font-weight:700; color:#fff; letter-spacing:-.01em; }
+.logo span { color:var(--accent); }
+.phase-tag { font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-lt); border:1px solid rgba(76,175,130,.4); padding:3px 10px; border-radius:20px; }
+
+.hero { padding:52px 0 36px; }
+.hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(28px,7vw,40px); font-weight:700; color:var(--forest); line-height:1.15; letter-spacing:-.02em; margin-bottom:14px; }
+.hero h1 em { font-style:normal; color:var(--accent); }
+.hero-sub { font-size:15px; color:var(--text2); max-width:480px; line-height:1.6; }
+.science-row { display:flex; align-items:center; gap:8px; margin-top:20px; flex-wrap:wrap; }
+.sci-pill { font-size:11px; font-weight:500; background:var(--card-tint); border:1px solid var(--border); color:var(--text2); padding:4px 10px; border-radius:20px; }
+.sci-pill.primary { background:var(--forest); color:#fff; border-color:var(--forest); }
+
+.section-label { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text3); margin-bottom:14px; margin-top:32px; }
+
+.card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow); margin-bottom:16px; }
+.card-title { font-family:var(--font-display); font-size:15px; font-weight:600; color:var(--forest); margin-bottom:18px; display:flex; align-items:center; gap:8px; }
+.card-icon { width:32px; height:32px; background:var(--card-tint); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+
+.field-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:420px) { .field-grid { grid-template-columns:1fr; } }
+.field { display:flex; flex-direction:column; gap:5px; }
+.field label { font-size:12px; font-weight:600; color:var(--text2); }
+.field-hint { font-size:11px; color:var(--text3); line-height:1.45; }
+.field input { height:44px; border:1.5px solid var(--border); border-radius:10px; padding:0 14px; font-family:var(--font-body); font-size:15px; color:var(--text); background:var(--bg); outline:none; transition:border-color .15s,box-shadow .15s; -webkit-appearance:none; }
+.field input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(76,175,130,.15); background:#fff; }
+
+.unit-toggle { display:flex; background:var(--bg); border:1.5px solid var(--border); border-radius:10px; overflow:hidden; height:44px; margin-bottom:18px; }
+.unit-btn { flex:1; border:none; background:transparent; font-family:var(--font-body); font-size:13px; font-weight:500; color:var(--text3); cursor:pointer; padding:0 16px; transition:all .15s; }
+.unit-btn.active { background:var(--forest); color:#fff; }
+
+.sex-row { display:flex; gap:10px; }
+.sex-btn { flex:1; height:44px; border:1.5px solid var(--border); border-radius:10px; background:var(--bg); font-family:var(--font-body); font-size:14px; font-weight:500; color:var(--text2); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:7px; transition:all .15s; }
+.sex-btn.active { border-color:var(--forest); background:var(--forest); color:#fff; }
+
+.field input[type=date] { font-family:var(--font-body); color:var(--text); min-height:44px; }
+.field input[type=date]::-webkit-calendar-picker-indicator { cursor:pointer; opacity:.55; }
+.field input[type=date]::-webkit-calendar-picker-indicator:hover { opacity:1; }
+
+/* Sitting height instructions */
+.sh-wrong { background:var(--red-bg); border:1px solid #F5B8B0; border-radius:10px; padding:12px 14px; margin-bottom:16px; }
+.sh-wrong strong { display:block; font-size:12px; color:var(--red); margin-bottom:7px; }
+.sh-wrong span { display:block; font-size:11.5px; color:var(--red); line-height:1.6; padding:2px 0; }
+.sh-wrong u { text-decoration:underline; text-underline-offset:2px; }
+
+.sh-diagram { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:10px; margin-bottom:16px; }
+.sh-diagram svg { width:100%; height:auto; display:block; }
+
+.sh-steps { margin-bottom:16px; }
+.sh-step { display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-bottom:1px solid var(--border); }
+.sh-step:last-child { border-bottom:none; }
+.sh-step span:last-child { font-size:12px; color:var(--text2); line-height:1.6; }
+.sh-num { flex-shrink:0; width:20px; height:20px; border-radius:50%; background:var(--forest); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+
+.sh-helper { background:var(--card-tint); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.sh-helper-title { font-size:12.5px; font-weight:600; color:var(--forest); margin-bottom:4px; }
+.sh-helper-sub { font-size:11px; color:var(--text2); line-height:1.55; margin-bottom:12px; }
+.sh-helper-row { display:flex; gap:10px; align-items:flex-end; }
+.sh-helper-row .field { flex:1; }
+.sh-helper-row .field label { font-size:11px; }
+.sh-minus { font-size:20px; color:var(--text3); font-weight:300; padding-bottom:11px; }
+.sh-helper-out { margin-top:11px; font-size:12px; font-weight:600; color:var(--mid); display:none; background:#fff; border-radius:7px; padding:9px 11px; border:1px solid var(--border); }
+.sh-helper-out.visible { display:block; }
+.sh-helper-out.bad { color:var(--red); border-color:#F5B8B0; background:var(--red-bg); }
+
+.sh-check { font-size:11px; margin-top:6px; display:none; line-height:1.5; }
+.sh-check.visible { display:block; }
+.sh-check.ok { color:var(--mid); }
+.sh-check.bad { color:var(--red); font-weight:600; }
+
+/* "Why does this matter" injury explainer */
+.why-details { margin-top:10px; }
+.why-details summary { font-size:11.5px; font-weight:600; color:var(--forest); cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:5px; padding:4px 0; }
+.why-details summary::-webkit-details-marker { display:none; }
+.why-details summary::before { content:'▸'; font-size:9px; transition:transform .15s; }
+.why-details[open] summary::before { transform:rotate(90deg); }
+.why-body { margin-top:9px; padding:12px 14px; background:rgba(255,255,255,.6); border-radius:8px; }
+.why-body h4 { font-size:11.5px; font-weight:700; color:var(--forest); margin:11px 0 5px; }
+.why-body h4:first-child { margin-top:0; }
+.why-body p { font-size:11.5px; color:var(--text2); line-height:1.7; margin-bottom:7px; }
+.why-body p:last-child { margin-bottom:0; }
+.why-body strong { color:var(--forest); font-weight:600; }
+.why-evidence { margin-top:11px; padding-top:9px; border-top:1px dotted var(--border); font-size:10.5px !important; color:var(--text3) !important; line-height:1.6 !important; }
+
+/* Claim bar — one honest line, detail on demand */
+.claim-bar { background:var(--card-tint); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:var(--radius); padding:14px 16px; margin-top:8px; }
+.claim-text strong { display:block; font-size:13px; color:var(--forest); font-weight:600; line-height:1.5; margin-bottom:3px; }
+.claim-text span { display:block; font-size:11px; color:var(--text3); }
+.claim-details { margin-top:10px; }
+.claim-details summary { font-size:11px; font-weight:600; color:var(--mid); cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:5px; padding:3px 0; }
+.claim-details summary::-webkit-details-marker { display:none; }
+.claim-details summary::before { content:'▸'; font-size:9px; transition:transform .15s; }
+.claim-details[open] summary::before { transform:rotate(90deg); }
+.claim-details summary:hover { color:var(--forest); }
+.claim-body { margin-top:9px; padding-top:11px; border-top:1px solid var(--border); }
+.claim-body p { font-size:11px; color:var(--text2); line-height:1.65; margin-bottom:9px; }
+.claim-body p:last-child { margin-bottom:0; }
+.claim-body strong { color:var(--forest); font-weight:600; }
+.claim-src { font-size:10px !important; color:var(--text3) !important; padding-top:8px; border-top:1px dotted var(--border); }
+
+/* Contextual accuracy card — shown on the RESULT, tailored to this child */
+.accuracy-card { background:var(--amber-bg); border:1px solid #F5D48A; border-radius:var(--radius-lg); padding:18px 20px; margin-bottom:14px; }
+.accuracy-head { font-family:var(--font-display); font-size:13px; font-weight:600; color:#7A6010; margin-bottom:9px; display:flex; align-items:center; gap:7px; }
+.accuracy-list { list-style:none; }
+.accuracy-list li { font-size:11.5px; color:#7A6010; line-height:1.65; padding:6px 0 6px 16px; position:relative; border-bottom:1px solid rgba(232,150,10,.15); }
+.accuracy-list li:last-child { border-bottom:none; }
+.accuracy-list li::before { content:'•'; position:absolute; left:3px; font-weight:700; }
+.accuracy-list li strong { font-weight:700; }
+
+/* Computed age badge */
+.age-badge { display:none; align-items:center; gap:8px; background:var(--card-tint); border:1px solid var(--border); border-radius:8px; padding:9px 12px; margin-top:8px; }
+.age-badge.visible { display:flex; background:#ECFFF6; border-color:#9FE7C6; }
+.age-badge.invalid { background:var(--red-bg); border-color:#F5B8B0; }
+.age-badge-icon { font-size:14px; }
+.age-badge-text { font-size:12px; color:var(--text2); font-weight:500; }
+.age-badge.invalid .age-badge-text { color:var(--red); }
+.age-badge-decimal { margin-left:auto; font-size:11px; color:var(--text3); font-family:var(--font-display); font-weight:600; }
+
+/* Consent card */
+.consent-card { background:var(--card); border:1.5px solid var(--border); border-radius:var(--radius-lg); padding:20px 22px; margin-bottom:16px; }
+.consent-card.complete { border-color:var(--accent); }
+.consent-title { font-family:var(--font-display); font-size:14px; font-weight:600; color:var(--forest); margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+.consent-intro { font-size:12px; color:var(--text2); line-height:1.6; margin-bottom:16px; }
+.consent-item { width:100%; border:0; background:transparent; font:inherit; text-align:left; color:inherit; display:flex; gap:11px; align-items:flex-start; padding:11px 0; border-bottom:1px solid var(--border); cursor:pointer; }
+.consent-item:last-of-type { border-bottom:none; }
+.consent-box { width:20px; height:20px; border:1.5px solid var(--text3); border-radius:5px; flex-shrink:0; margin-top:1px; display:flex; align-items:center; justify-content:center; transition:all .15s; background:var(--bg); }
+.consent-item.checked .consent-box { background:var(--accent); border-color:var(--accent); }
+.consent-box::after { content:'✓'; color:#fff; font-size:13px; font-weight:700; opacity:0; transition:opacity .15s; }
+.consent-item.checked .consent-box::after { opacity:1; }
+.consent-text { font-size:12px; color:var(--text2); line-height:1.6; }
+.consent-text strong { color:var(--forest); font-weight:600; }
+.consent-privacy { margin-top:14px; background:var(--card-tint); border-radius:8px; padding:11px 13px; font-size:11px; color:var(--text2); line-height:1.6; display:flex; gap:9px; align-items:flex-start; }
+.consent-privacy-icon { font-size:14px; flex-shrink:0; }
+
+.submit-btn:disabled { background:#B8C9BF; cursor:not-allowed; }
+.submit-btn:disabled:hover { background:#B8C9BF; }
+.submit-hint { text-align:center; font-size:11px; color:var(--text3); margin-top:9px; }
+
+.advanced-toggle { display:flex; align-items:center; gap:12px; width:100%; background:var(--card-tint); border:1.5px dashed var(--border); border-radius:var(--radius); padding:14px 16px; cursor:pointer; text-align:left; font-family:var(--font-body); transition:all .15s; margin-bottom:16px; }
+.advanced-toggle:hover { border-color:var(--accent); }
+.advanced-toggle.open { border-style:solid; border-color:var(--accent); background:#fff; }
+.adv-icon { font-size:20px; flex-shrink:0; }
+.adv-text { flex:1; }
+.adv-title { font-size:13px; font-weight:600; color:var(--forest); margin-bottom:2px; }
+.adv-sub { font-size:11px; color:var(--text2); line-height:1.5; }
+.adv-chev { font-size:14px; color:var(--text3); transition:transform .2s; }
+.advanced-toggle.open .adv-chev { transform:rotate(180deg); }
+#advancedPanel { display:none; }
+#advancedPanel.open { display:block; }
+
+.submit-btn { width:100%; height:54px; background:var(--forest); color:#fff; border:none; border-radius:var(--radius); font-family:var(--font-display); font-size:16px; font-weight:600; cursor:pointer; margin-top:24px; display:flex; align-items:center; justify-content:center; gap:8px; transition:background .15s,transform .1s; }
+.submit-btn:hover { background:var(--mid); }
+.submit-btn:active { transform:scale(.99); }
+
+#result-section { display:none; }
+#result-section.visible { display:block; }
+
+.result-hero { background:var(--forest); border-radius:var(--radius-lg); padding:28px 24px; color:#fff; margin-bottom:14px; position:relative; overflow:hidden; }
+.result-hero::before { content:''; position:absolute; top:-60px; right:-60px; width:200px; height:200px; background:radial-gradient(circle,rgba(76,175,130,.25),transparent 70%); pointer-events:none; }
+.result-eyebrow { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-lt); margin-bottom:8px; }
+.result-name { font-family:var(--font-display); font-size:15px; font-weight:500; color:rgba(255,255,255,.7); margin-bottom:6px; }
+.result-height-display { display:flex; align-items:flex-end; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+.result-cm { font-family:var(--font-display); font-size:clamp(52px,14vw,72px); font-weight:700; color:#fff; letter-spacing:-.03em; line-height:1; }
+.result-unit { font-size:20px; font-weight:500; color:var(--accent-lt); padding-bottom:10px; }
+.result-ft { font-size:18px; font-weight:500; color:rgba(255,255,255,.6); padding-bottom:12px; }
+
+.growth-bar-wrap { background:rgba(255,255,255,.08); border-radius:8px; padding:14px 16px; margin-bottom:16px; }
+.growth-bar-label { font-size:11px; font-weight:600; color:rgba(255,255,255,.6); letter-spacing:.06em; text-transform:uppercase; margin-bottom:10px; display:flex; justify-content:space-between; }
+.growth-track { height:8px; background:rgba(255,255,255,.15); border-radius:4px; overflow:hidden; margin-bottom:6px; }
+.growth-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-lt)); border-radius:4px; width:0; transition:width 1.2s cubic-bezier(.25,1,.5,1); }
+.growth-markers { display:flex; justify-content:space-between; font-size:10px; color:rgba(255,255,255,.4); }
+
+.result-stats-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.result-stat { background:rgba(255,255,255,.08); border-radius:10px; padding:12px; text-align:center; }
+.result-stat-val { font-family:var(--font-display); font-size:18px; font-weight:700; color:#fff; margin-bottom:2px; }
+.result-stat-label { font-size:10px; color:rgba(255,255,255,.5); font-weight:500; line-height:1.3; }
+
+.range-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px 22px; margin-bottom:14px; box-shadow:var(--shadow); }
+.range-title { font-family:var(--font-display); font-size:13px; font-weight:600; color:var(--text2); margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+.range-visual { position:relative; height:48px; margin-bottom:8px; }
+.range-track { position:absolute; top:50%; transform:translateY(-50%); width:100%; height:4px; background:var(--border); border-radius:2px; }
+.range-50 { position:absolute; top:50%; transform:translateY(-50%); height:8px; background:var(--accent); border-radius:4px; opacity:.7; }
+.range-point { position:absolute; top:50%; transform:translate(-50%,-50%); width:14px; height:14px; background:var(--forest); border:2.5px solid #fff; border-radius:50%; box-shadow:var(--shadow); }
+.range-label-low, .range-label-high { position:absolute; bottom:0; font-size:10px; font-weight:600; color:var(--text3); }
+.range-label-low { left:0; } .range-label-high { right:0; }
+
+.maturity-card { border-radius:var(--radius-lg); padding:18px 20px; margin-bottom:14px; border:1px solid var(--border); }
+.maturity-card.pre-phv { background:#EEF7F2; border-color:#B8DFCC; }
+.maturity-card.approaching { background:#FEF7E6; border-color:#F5D48A; }
+.maturity-card.at-phv { background:#FEF0EC; border-color:#F5BBA8; }
+.maturity-card.post-phv { background:#EEF7F2; border-color:#B8DFCC; }
+.maturity-card.near-adult { background:#F0EEFA; border-color:#C5B8F0; }
+.maturity-header { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.maturity-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.maturity-title { font-family:var(--font-display); font-size:14px; font-weight:600; color:var(--forest); }
+.maturity-pah { margin-left:auto; font-size:13px; font-weight:700; color:var(--mid); }
+.maturity-body { font-size:12px; color:var(--text2); line-height:1.6; }
+.maturity-tip { margin-top:8px; font-size:11px; color:var(--text2); background:rgba(255,255,255,.55); border-radius:6px; padding:9px 11px; line-height:1.55; }
+
+#phvCard { display:none; }
+#phvCard.visible { display:block; }
+.phv-card { background:var(--card); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:var(--radius-lg); padding:20px 22px; margin-bottom:14px; box-shadow:var(--shadow); }
+.phv-title { font-family:var(--font-display); font-size:13px; font-weight:600; color:var(--text2); margin-bottom:14px; }
+.phv-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+.phv-stat { background:var(--card-tint); border-radius:10px; padding:14px; text-align:center; }
+.phv-val { font-family:var(--font-display); font-size:20px; font-weight:700; color:var(--forest); margin-bottom:2px; }
+.phv-lbl { font-size:10px; color:var(--text2); font-weight:500; line-height:1.4; }
+.phv-note { font-size:11px; color:var(--text2); line-height:1.65; background:var(--card-tint); border-radius:8px; padding:11px 13px; }
+
+.sport-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px; margin-bottom:14px; box-shadow:var(--shadow); }
+.sport-title { font-family:var(--font-display); font-size:13px; font-weight:600; color:var(--text2); margin-bottom:6px; }
+.sport-intro { font-size:11px; color:var(--text3); line-height:1.6; margin-bottom:12px; }
+.sport-tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.sport-tag { font-size:12px; font-weight:500; padding:5px 12px; border-radius:20px; background:var(--card-tint); border:1px solid var(--border); color:var(--mid); }
+.sport-caveat { font-size:11px; color:#7A6010; line-height:1.65; background:var(--amber-bg); border:1px solid #F5D48A; border-radius:8px; padding:11px 13px; }
+
+.email-card { background:var(--forest); border-radius:var(--radius-lg); padding:22px; margin-bottom:14px; color:#fff; }
+.email-title { font-family:var(--font-display); font-size:15px; font-weight:600; margin-bottom:6px; }
+.email-sub { font-size:12px; color:rgba(255,255,255,.7); line-height:1.6; margin-bottom:14px; }
+.email-row { display:flex; gap:8px; flex-wrap:wrap; }
+.email-row input { flex:1; min-width:180px; height:44px; border:1.5px solid rgba(255,255,255,.2); border-radius:10px; padding:0 14px; font-family:var(--font-body); font-size:14px; color:#fff; background:rgba(255,255,255,.08); outline:none; }
+.email-row input::placeholder { color:rgba(255,255,255,.4); }
+.email-row input:focus { border-color:var(--accent); background:rgba(255,255,255,.12); }
+.email-row input:disabled { opacity:.5; }
+.email-row button { height:44px; padding:0 20px; background:var(--accent); color:var(--forest); border:none; border-radius:10px; font-family:var(--font-body); font-size:14px; font-weight:600; cursor:pointer; white-space:nowrap; transition:background .15s; }
+.email-row button:hover { background:var(--accent-lt); }
+.email-msg { font-size:12px; margin-top:10px; display:none; line-height:1.5; }
+.email-msg.visible { display:block; }
+.email-privacy { font-size:10px; color:rgba(255,255,255,.45); margin-top:10px; line-height:1.5; }
+
+.action-row { display:flex; gap:10px; margin-top:4px; flex-wrap:wrap; }
+.action-btn { flex:1; min-width:130px; height:44px; border-radius:10px; font-family:var(--font-body); font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; transition:all .15s; border:1.5px solid var(--border); background:var(--card); color:var(--text2); }
+.action-btn:hover { background:var(--card-tint); }
+
+.disclaimer { background:var(--amber-bg); border:1px solid #F5D48A; border-radius:var(--radius); padding:14px 16px; margin-top:14px; }
+.disclaimer-title { font-size:11px; font-weight:700; color:var(--amber); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; }
+.disclaimer p { font-size:11px; color:#7A6010; line-height:1.65; }
+
+.reassess-card { background:var(--card-tint); border:1px solid var(--border); border-radius:var(--radius); padding:14px 16px; margin-top:10px; display:flex; align-items:center; gap:12px; }
+.reassess-icon { font-size:22px; flex-shrink:0; }
+.reassess-text { font-size:12px; color:var(--text2); line-height:1.5; }
+.reassess-text strong { color:var(--forest); }
+
+.error-banner { background:var(--red-bg); border:1px solid #F5B8B0; border-radius:var(--radius); padding:12px 16px; font-size:13px; color:var(--red); margin-top:12px; display:none; }
+.error-banner.visible { display:block; }
+
+footer { text-align:center; padding:40px 0 20px; font-size:11px; color:var(--text3); line-height:1.8; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+.fade-up { animation:fadeUp .4s ease both; }
+.fade-up-1 { animation-delay:.05s; } .fade-up-2 { animation-delay:.1s; }
+.fade-up-3 { animation-delay:.15s; } .fade-up-4 { animation-delay:.2s; }
+@media (prefers-reduced-motion:reduce) { *, .growth-fill { transition:none !important; animation:none !important; } }
+
+/* ═══════════ PRINT STYLESHEET ═══════════ */
+@media print {
+  @page { margin: 14mm; }
+  body { background:#fff !important; color:#000; font-size:10.5pt; }
+  .page { max-width:100%; padding:0; }
+
+  .site-header, .hero, .section-label, .unit-toggle, .submit-btn,
+  .error-banner, .action-row, .email-card, .reassess-card,
+  #formSection, footer, .sh-diagram, .sh-helper, .why-details { display:none !important; }
+
+  #result-section { display:block !important; }
+
+  #result-section::before {
+    content:"V2 Youth OS — Adult Height Estimator Estimate";
+    display:block;
+    font-family:var(--font-display);
+    font-size:15pt; font-weight:700; color:#1B3A2D;
+    border-bottom:2pt solid #1B3A2D;
+    padding-bottom:6pt; margin-bottom:14pt;
+  }
+
+  .result-hero {
+    background:#fff !important; color:#000 !important;
+    border:1.5pt solid #1B3A2D; box-shadow:none;
+    padding:12pt; page-break-inside:avoid;
+  }
+  .result-hero::before { display:none !important; }
+  .result-eyebrow { color:#2C5F47 !important; }
+  .result-name { color:#4A6B58 !important; }
+  .result-cm { color:#1B3A2D !important; font-size:34pt !important; }
+  .result-unit, .result-ft { color:#4A6B58 !important; }
+  .growth-bar-wrap { background:#EEF7F2 !important; }
+  .growth-bar-label, .growth-markers { color:#4A6B58 !important; }
+  .growth-track { background:#D6E8DE !important; }
+  .growth-fill { background:#4CAF82 !important; }
+  .result-stat { background:#EEF7F2 !important; border:0.5pt solid #D6E8DE; }
+  .result-stat-val { color:#1B3A2D !important; }
+  .result-stat-label { color:#4A6B58 !important; }
+
+  .card, .range-card, .maturity-card, .sport-card, .phv-card,
+  .disclaimer, .accuracy-card {
+    box-shadow:none !important;
+    border:0.5pt solid #999 !important;
+    page-break-inside:avoid;
+    margin-bottom:8pt;
+  }
+  .maturity-tip, .phv-note, .sport-caveat { background:#F5F5F2 !important; }
+  .accuracy-card { background:#FEF7E6 !important; }
+  .accuracy-head, .accuracy-list li { color:#000 !important; }
+
+  #result-section::after {
+    content:"Khamis-Roche method (Pediatrics 1994;94:504–507). Mirwald et al. (Med Sci Sports Exerc 2002). This is a statistical estimate, not a medical diagnosis. Generated by V2 Youth OS.";
+    display:block; margin-top:12pt; padding-top:6pt;
+    border-top:0.5pt solid #999;
+    font-size:7.5pt; color:#555; line-height:1.5;
+  }
+
+  .fade-up { animation:none !important; }
+}
+
+/* ════════════════════════════
+   PHV V3 — highly visible recommended full assessment
+════════════════════════════ */
+.phv-priority-banner{
+  background:linear-gradient(135deg,#12372A,#0B6F50);
+  color:#fff;
+  border-radius:18px;
+  padding:18px 20px;
+  margin:20px 0 16px;
+  box-shadow:0 12px 32px rgba(18,55,42,.20);
+}
+.phv-priority-kicker{
+  display:inline-flex;
+  background:#FFD447;
+  color:#12372A;
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+.phv-priority-banner h3{font-size:17px;margin:0 0 6px}
+.phv-priority-banner p{font-size:12px;line-height:1.65;color:rgba(255,255,255,.78);margin:0}
+.advanced-toggle{
+  border:2px solid #F97316;
+  border-left-width:7px;
+  background:linear-gradient(135deg,#FFF4E6,#FFFDF8);
+  box-shadow:0 9px 24px rgba(249,115,22,.10);
+  padding:17px 18px;
+}
+.advanced-toggle:hover{border-color:#D95B0B;background:#FFF7ED}
+.advanced-toggle.open{
+  border-color:#138A5B;
+  border-left-color:#138A5B;
+  background:linear-gradient(135deg,#ECFFF6,#fff);
+}
+.advanced-toggle .adv-icon{
+  width:46px;height:46px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  background:#F97316;color:#fff;font-size:21px;flex:0 0 auto;
+}
+.advanced-toggle.open .adv-icon{background:#138A5B}
+.adv-title{font-size:14px;font-weight:800;color:#12372A}
+.adv-sub{font-size:11px;line-height:1.55;color:#4A6B58;margin-top:3px}
+.phv-recommended{
+  display:inline-flex;
+  margin-top:7px;
+  padding:3px 8px;
+  border-radius:999px;
+  background:#F97316;
+  color:#fff;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+#advancedPanel.open{
+  display:block;
+  animation:phvReveal .22s ease-out;
+}
+@keyframes phvReveal{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.submit-btn.full-assessment{
+  background:linear-gradient(135deg,#12372A,#138A5B);
+}
+
+
+/* Module 01 is intentionally focused on adult-height estimation only. */
+#advToggle, #advancedPanel, .phv-priority-banner, #phvCard,
+.maturity-card, .sport-card, .phv-card { display:none !important; }
+.module-two-cta{
+  background:linear-gradient(135deg,#FFF4E6,#fff);
+  border:1px solid #FDBA74;
+  border-left:5px solid #F97316;
+  border-radius:14px;
+  padding:16px 18px;
+  margin:18px 0;
+}
+.module-two-cta h3{font-size:14px;color:#7C2D12;margin:0 0 5px}
+.module-two-cta p{font-size:11px;line-height:1.6;color:#7C3B10;margin:0 0 10px}
+.module-two-cta a{display:inline-flex;background:#F97316;color:#fff;padding:8px 12px;border-radius:999px;font-size:11px;font-weight:800;text-decoration:none}
+.workings-card{
+  background:#F8FAFC;border:1px solid var(--border);border-radius:16px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)
+}
+.workings-card h3{font-family:var(--font-display);font-size:14px;color:var(--forest);margin:0 0 10px}
+.workings-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.workings-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 11px;font-size:11px;color:var(--text2)}
+.workings-item strong{display:block;color:var(--text1);font-size:11px;margin-bottom:2px}
+.workings-note{font-size:10px;line-height:1.55;color:var(--text3);margin-top:10px}
+@media(max-width:620px){.workings-grid{grid-template-columns:1fr}}
+
+
+.confidence-card{
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)
+}
+.confidence-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.confidence-title{font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--forest)}
+.confidence-subtitle{font-size:10px;color:var(--text3);line-height:1.5;margin-top:3px}
+.confidence-score{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--forest);white-space:nowrap}
+.confidence-score span{font-size:12px;color:var(--text3);font-weight:500}
+.confidence-track{height:10px;background:#E6EFEA;border-radius:999px;overflow:hidden;margin:14px 0 10px}
+.confidence-fill{height:100%;width:0;background:linear-gradient(90deg,#E8960A,#4CAF82);border-radius:999px;transition:width .8s ease}
+.confidence-label{font-size:12px;font-weight:700;color:var(--forest)}
+.confidence-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.confidence-item{background:var(--card-tint);border:1px solid var(--border);border-radius:9px;padding:9px 10px;font-size:10px;color:var(--text2)}
+.confidence-item strong{display:block;color:var(--forest);font-size:10px;margin-bottom:2px}
+.confidence-warning{font-size:10px;line-height:1.55;color:var(--text3);margin-top:11px}
+@media(max-width:520px){.confidence-breakdown{grid-template-columns:1fr}}
+
+</style>
+<meta content="#12372A" name="theme-color"/><meta content="index,follow,max-image-preview:large" name="robots"/><link href="/assets/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/assets/site.webmanifest" rel="manifest"/><meta content="Estimate likely adult height using the non-X-ray Khamis–Roche method, with uncertainty ranges, method-fit score and transparent workings." name="description"/><link href="https://v2fitness.com.au/youth-os/adult-height-estimator/" rel="canonical"/><meta content="website" property="og:type"/><meta content="V2Fitness" property="og:site_name"/><meta content="Adult Height Estimator | V2 Youth OS" property="og:title"/><meta content="Estimate likely adult height using the non-X-ray Khamis–Roche method, with uncertainty ranges, method-fit score and transparent workings." property="og:description"/><meta content="https://v2fitness.com.au/youth-os/adult-height-estimator/" property="og:url"/><meta content="en_AU" property="og:locale"/><meta content="summary" name="twitter:card"/><meta content="Adult Height Estimator | V2 Youth OS" name="twitter:title"/><meta content="Estimate likely adult height using the non-X-ray Khamis–Roche method, with uncertainty ranges, method-fit score and transparent workings." name="twitter:description"/></head>
+<body>
+<div style="background:linear-gradient(90deg,#FFD447,#F4B64A);color:#12372A;text-align:center;padding:9px 16px;font:800 12px/1.4 Inter,Arial,sans-serif;">FREE DURING EARLY ACCESS FOR A LIMITED TIME · NO ACCOUNT REQUIRED</div>
+<header class="site-header">
+<div class="logo">V2 <span>Youth OS</span></div>
+<div style="display:flex;align-items:center;gap:12px"><a href="/youth-os/" style="color:rgba(255,255,255,.72);font-size:11px;font-weight:600">Youth OS Home</a><a href="/" style="color:rgba(255,255,255,.72);font-size:11px;font-weight:600">V2Fitness</a><div class="phase-tag">Module 01 · Adult Height</div></div>
+</header>
+<div class="page">
+<section class="hero">
+<div class="hero-eyebrow">Adult Height Estimator</div>
+<h1>How tall will<br/><em>your child grow?</em></h1>
+<p class="hero-sub">A science-backed estimate of your child's adult height and biological maturity stage — with training guidance for their stage of development.</p>
+<div class="science-row">
+<span class="sci-pill primary">Khamis-Roche Method</span>
+<span class="sci-pill">Pediatrics 1994</span>
+<span class="sci-pill">Ages 4–17.5</span>
+<a class="sci-pill" href="/youth-os/growth-spurt-estimator/" style="background:#FFF4E6;color:#B64708;border-color:#FDBA74;text-decoration:none">Growth-spurt timing is now Module 02 →</a>
+</div>
+</section>
+<section id="formSection">
+<div class="claim-bar">
+<div class="claim-text">
+<strong>A science-backed, non-invasive estimate of likely adult height using the Khamis–Roche method.</strong>
+<span>Khamis-Roche method · <em>Pediatrics</em> 1994 · validated for ages 4.0–17.5</span>
+</div>
+<details class="claim-details">
+<summary>How accurate is this, really?</summary>
+<div class="claim-body">
+<p><strong>The honest numbers.</strong> About half of children finish within roughly <strong>2 cm</strong> of the estimate. About 90% finish within <strong>5 cm</strong> (boys) or <strong>4 cm</strong> (girls). It is an estimate with a real margin, not a prediction.</p>
+<p><strong>It is not the most accurate method that exists.</strong> Bone-age X-ray methods (Bayley-Pinneau, Tanner-Whitehouse) beat it — but they need a radiograph and a specialist to read it. Khamis–Roche is one of the most established practical methods for estimating adult stature without a skeletal-age X-ray.</p>
+<p><strong>Where it is weakest.</strong> Error is largest between ages 11 and 15, when growth spurts arrive at wildly different times. It can reach ±5–7 cm for children at the extremes of the growth chart, or growing in an unusual pattern. It is less reliable for children with hormonal conditions, or in intensive athletic training such as elite gymnastics.</p>
+<p><strong>Who it was built on.</strong> 223 boys and 210 girls, all white North American children, from the Fels Longitudinal Study. Accuracy for children of other ethnic backgrounds has never been properly established — which matters a great deal in Australia. Treat the estimate with extra caution accordingly.</p>
+<p class="claim-src">Khamis HJ &amp; Roche AF. Predicting adult stature without using skeletal age: the Khamis-Roche method. <em>Pediatrics</em> 1994;94(4):504–507. Coefficients here are transcribed from the original paper and verified against its own worked example.</p>
+</div>
+</details>
+</div>
+<div style="background:#fff;border:1px solid #D6E8DE;border-left:4px solid #10B981;border-radius:12px;padding:14px 16px;margin:16px 0;">
+<div style="font-weight:800;color:#12372A;font-size:12px;margin-bottom:5px;">Why this module exists</div>
+<div style="font-size:11px;line-height:1.65;color:#4A6B58;">Kids are not small adults. Growth can change body proportions, movement, coordination and how training is tolerated. This module gives parents and coaches extra context—but never replaces observation, communication, qualified coaching or clinical assessment.</div>
+</div>
+<div class="section-label">Measurement units</div>
+<div class="unit-toggle" style="max-width:220px">
+<button class="unit-btn active" id="btn-metric" onclick="setUnit('metric')" type="button">cm / kg</button>
+<button class="unit-btn" id="btn-imperial" onclick="setUnit('imperial')" type="button">in / lb</button>
+</div>
+<div class="section-label">Your child</div>
+<div class="card">
+<div class="card-title"><div class="card-icon">👟</div>Child's details</div>
+<div class="field" style="margin-bottom:14px">
+<label>First name <span style="font-weight:400;color:var(--text3)">(optional)</span></label>
+<input autocomplete="off" id="childName" oninput="saveYouthGrowthProfile()" placeholder="e.g. Alex" type="text"/>
+</div>
+<div class="field" style="margin-bottom:14px">
+<label>Biological sex</label>
+<div class="sex-row">
+<button class="sex-btn active" id="btn-male" onclick="setSex('male')" type="button">♂ Male</button>
+<button class="sex-btn" id="btn-female" onclick="setSex('female')" type="button">♀ Female</button>
+</div>
+</div>
+<div class="field" style="margin-bottom:14px">
+<label>Date of birth</label>
+<input id="childDob" onchange="updateAge();saveYouthGrowthProfile()" oninput="updateAge();saveYouthGrowthProfile()" type="date"/>
+<span class="field-hint">Used to calculate exact age. The method's coefficients change every 6 months, so precise age matters. This never leaves your device.</span>
+<div class="age-badge" id="ageBadge">
+<span class="age-badge-icon" id="ageBadgeIcon">🎂</span>
+<span class="age-badge-text" id="ageBadgeText"></span>
+<span class="age-badge-decimal" id="ageBadgeDecimal"></span>
+</div>
+</div>
+<div class="field-grid">
+<div class="field">
+<label id="label-height">Standing height (cm)</label>
+<input id="childHeight" oninput="saveYouthGrowthProfile()" placeholder="e.g. 152" step="0.1" type="number"/>
+<span class="field-hint">No shoes, heels against a wall</span>
+</div>
+<div class="field">
+<label id="label-weight">Weight (kg)</label>
+<input id="childWeight" oninput="saveYouthGrowthProfile()" placeholder="e.g. 42" step="0.1" type="number"/>
+<span class="field-hint">Morning weight is most consistent</span>
+</div>
+</div>
+</div>
+<div class="section-label">Biological parents' heights</div>
+<div class="card">
+<div class="card-title"><div class="card-icon">👨‍👩‍👦</div>Parent heights</div>
+<div class="field-grid">
+<div class="field">
+<label id="label-father">Father's height (cm)</label>
+<input id="fatherHeight" placeholder="e.g. 178" step="0.1" type="number"/>
+</div>
+<div class="field">
+<label id="label-mother">Mother's height (cm)</label>
+<input id="motherHeight" placeholder="e.g. 165" step="0.1" type="number"/>
+</div>
+</div>
+<div class="disclaimer" style="margin-top:14px;margin-bottom:0">
+<div class="disclaimer-title">Missing a parent's height?</div>
+<p>The original researchers recommend the present parent estimate the absent parent's height — reported heights work reasonably well. As a last resort you may use Australian averages (male ~175 cm, female ~162 cm), but this will reduce accuracy.</p>
+</div>
+</div>
+<div class="module-two-cta">
+<h3>Looking for growth-spurt timing?</h3>
+<p>Peak Height Velocity and Mirwald maturity offset answer a different question from adult-height estimation. To keep this calculator simple, that assessment is now a separate Youth OS module.</p>
+<a href="/youth-os/growth-spurt-estimator/">Open Module 02 — Growth Spurt &amp; PHV →</a>
+</div>
+<div class="consent-card" id="consentCard">
+<div class="consent-title">🔒 Before you continue</div>
+<div class="consent-intro">This tool is for parents and guardians. Please confirm each of the following.</div>
+<button aria-checked="false" class="consent-item" id="c1" onclick="toggleConsent('c1')" role="checkbox" type="button">
+<div class="consent-box"></div>
+<div class="consent-text">I am the <strong>parent or legal guardian</strong> of this child, or I am over 18 and have their guardian's permission to enter these measurements.</div>
+</button>
+<button aria-checked="false" class="consent-item" id="c2" onclick="toggleConsent('c2')" role="checkbox" type="button">
+<div class="consent-box"></div>
+<div class="consent-text">I understand this is a <strong>statistical estimate, not medical advice</strong>, not a diagnosis, and not a guarantee. It does not replace advice from a GP, paediatrician or other qualified health professional.</div>
+</button>
+<button aria-checked="false" class="consent-item" id="c3" onclick="toggleConsent('c3')" role="checkbox" type="button">
+<div class="consent-box"></div>
+<div class="consent-text">I have read the <strong>method limitations above</strong>, including that prediction error varies between children and that this estimate may be less reliable outside the population and age ranges used to develop the method.</div>
+</button>
+<div class="consent-privacy">
+<span class="consent-privacy-icon">🛡️</span>
+<span><strong style="color:var(--forest)">Your child's measurements stay on this device.</strong> The calculation runs in your browser. V2Fitness does not collect or store the name, date of birth, heights, weight or result entered into this calculator.</span>
+</div>
+</div>
+<div class="error-banner" id="errorBanner"></div>
+<button class="submit-btn" disabled="" id="submitBtn" onclick="calculate()" type="button">
+<svg aria-hidden="true" fill="none" focusable="false" height="18" viewbox="0 0 24 24" width="18"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path></svg>
+      Calculate Estimate
+    </button>
+<div class="submit-hint" id="submitHint">Please confirm all three statements above to continue</div>
+</section>
+<section id="result-section">
+<div class="section-label" style="margin-top:40px">Your result</div>
+<div class="result-hero fade-up">
+<div class="result-eyebrow">Estimated adult height</div>
+<div class="result-name" id="resultName"></div>
+<div class="result-height-display">
+<div class="result-cm" id="resultCm">—</div>
+<div class="result-unit">cm</div>
+<div class="result-ft" id="resultFt"></div>
+</div>
+<div class="growth-bar-wrap">
+<div class="growth-bar-label">
+<span>Growth completed</span>
+<span id="growthBarPct">0%</span>
+</div>
+<div class="growth-track"><div class="growth-fill" id="growthFill"></div></div>
+<div class="growth-markers"><span>Birth</span><span id="growthBarMax"></span></div>
+</div>
+<div class="result-stats-row">
+<div class="result-stat">
+<div class="result-stat-val" id="statPAH">—</div>
+<div class="result-stat-label">% of adult height</div>
+</div>
+<div class="result-stat">
+<div class="result-stat-val" id="statRemaining">—</div>
+<div class="result-stat-label">cm still to grow</div>
+</div>
+<div class="result-stat">
+<div class="result-stat-val" id="statMidparent">—</div>
+<div class="result-stat-label">cm mid-parent</div>
+</div>
+</div>
+</div>
+<div class="confidence-card fade-up fade-up-1">
+<div class="confidence-head">
+<div>
+<div class="confidence-title">🎯 Estimate confidence score</div>
+<div class="confidence-subtitle">Youth OS method-fit and input-quality score</div>
+</div>
+<div class="confidence-score"><span id="confidenceScore">—</span><span>/100</span></div>
+</div>
+<div class="confidence-track"><div class="confidence-fill" id="confidenceFill"></div></div>
+<div class="confidence-label" id="confidenceLabel">—</div>
+<div class="confidence-breakdown">
+<div class="confidence-item"><strong>Age fit</strong><span id="confidenceAge">—</span></div>
+<div class="confidence-item"><strong>Date accuracy</strong>Exact DOB used</div>
+<div class="confidence-item"><strong>Parent data</strong>Both biological-parent heights supplied</div>
+<div class="confidence-item"><strong>Child measurements</strong>Standing height and weight passed validation</div>
+</div>
+<div class="confidence-warning">
+        This score is <strong>not the probability that the final height will be correct</strong>.
+        It measures how well the submitted information fits this non-X-ray method. The estimated
+        height range remains the more important expression of statistical uncertainty.
+      </div>
+</div>
+<div class="range-card fade-up fade-up-1">
+<div class="range-title">
+        📊 Estimated adult-height range
+        <span id="rangeLabel" style="font-size:11px;font-weight:400;color:var(--text3);margin-left:auto"></span>
+</div>
+<div class="range-visual">
+<div class="range-track"></div>
+<div class="range-50" id="range50"></div>
+<div class="range-point" id="rangePoint"></div>
+<div class="range-label-low" id="rangeLow"></div>
+<div class="range-label-high" id="rangeHigh"></div>
+</div>
+<div style="font-size:11px;color:var(--text3);margin-top:10px;line-height:1.55">
+<strong style="color:var(--text2)">Inner bar:</strong> approximately 50% of children in the original study finished inside this narrower error band.
+        <strong style="color:var(--text2)">Full width:</strong> approximately 90% finished inside this wider error band.
+      </div>
+</div>
+<div class="workings-card fade-up fade-up-2">
+<h3>🧮 How this estimate was calculated</h3>
+<div class="workings-grid">
+<div class="workings-item"><strong>Method</strong>Khamis–Roche, without skeletal-age X-ray</div>
+<div class="workings-item"><strong>Exact age used</strong><span id="workAge">—</span></div>
+<div class="workings-item"><strong>Current measurements</strong><span id="workChild">—</span></div>
+<div class="workings-item"><strong>Biological-parent midpoint</strong><span id="workParents">—</span></div>
+<div class="workings-item"><strong>Central estimate</strong><span id="workEstimate">—</span></div>
+<div class="workings-item"><strong>Wider study error band</strong><span id="workBand">—</span></div>
+</div>
+<div class="workings-note">
+        The calculator selects the published age- and sex-specific Khamis–Roche coefficients,
+        converts measurements into the units used by the original equation, calculates a central
+        estimate, then applies the study's reported error bands. The displayed range is not a
+        guarantee or an individual probability.
+      </div>
+</div>
+<div class="accuracy-card fade-up fade-up-2" id="accuracyCard">
+<div class="accuracy-head">⚠️ How much to trust this number</div>
+<ul class="accuracy-list" id="accuracyList"></ul>
+</div>
+<div class="maturity-card fade-up fade-up-2" id="maturityCard">
+<div class="maturity-header">
+<div class="maturity-dot" id="maturityDot"></div>
+<div class="maturity-title" id="maturityTitle"></div>
+<div class="maturity-pah" id="maturityPahDisplay"></div>
+</div>
+<div class="maturity-body" id="maturityBody"></div>
+<div class="maturity-tip" id="maturityTip"></div>
+<details class="why-details">
+<summary>Why is the growth spurt riskier for sports injury?</summary>
+<div class="why-body">
+<h4>1. Bone outruns muscle and tendon</h4>
+<p>During the spurt, long bones lengthen faster than the muscles and tendons attached to them can adapt. The muscle-tendon unit is effectively stretched taut across a lengthening frame — flexibility drops, and <strong>tension rises at the points where tendons anchor into bone</strong>.</p>
+<h4>2. The anchor points are the weak link</h4>
+<p>In an adult, that anchor is solid bone. In a growing child it is an <strong>apophysis</strong> — an active growth plate. It is softer than the tendon pulling on it, so under repeated load <strong>the bone gives before the tendon does.</strong> That is what produces the classic growing-athlete injuries:</p>
+<p style="padding-left:10px;border-left:2px solid var(--border)">
+<strong>Osgood-Schlatter</strong> — the patellar tendon pulling on the shin bone, just below the knee.<br/>
+<strong>Sever's disease</strong> — the Achilles pulling on the heel bone.<br/>
+<strong>Sinding-Larsen-Johansson</strong> — the tendon at the bottom of the kneecap.
+          </p>
+<h4>3. Bone density temporarily dips</h4>
+<p>Bone lengthens before it fully mineralises. There is a window where the skeleton is longer but <strong>not yet as strong</strong>, and the growth plates are especially vulnerable to shearing and twisting forces — the exact loads in cutting, landing and pivoting sports.</p>
+<h4>4. "Adolescent awkwardness" — the coordination dip</h4>
+<p>Limb lengths change faster than the nervous system can recalibrate. Motor control and balance <strong>temporarily get worse</strong>, starting around six months before peak growth. Landing mechanics degrade at exactly the moment the levers are longest and the body is heaviest. Encouragingly, the research suggests <strong>staying in structured training limits this dip</strong> — the answer is smarter training, not stopping.</p>
+<h4>5. It differs by sex</h4>
+<p>In girls, hormonal changes increase joint laxity, which is linked to more knee and ankle injuries. In boys, rising testosterone is associated with a more aggressive, impulsive playing style — part of the added risk is behavioural, not just structural.</p>
+<h4>What to actually do</h4>
+<p>Don't stop. <strong>Adjust.</strong> Trim volume and high-impact load through the window, protect sleep and food, keep technical and strength work going, and take new knee or heel pain seriously rather than coaching through it. Then rebuild load as the spurt passes.</p>
+<p class="why-evidence"><strong>How strong is this evidence?</strong> The biological mechanism is well established. The injury statistics are suggestive but not settled — a 2025 systematic review of youth football found injury burden highest around peak growth in five of eight studies, and consistently lowest before the spurt, but graded the overall certainty of evidence as <em>very low</em>. Read this as a well-founded reason for caution, not as a proven law. Note also that this app's %PAH bands mirror how that literature defines the risk window (circa-PHV ≈ 88–93% of predicted adult height).</p>
+</div>
+</details>
+</div>
+<div class="fade-up fade-up-3" id="phvCard">
+<div class="phv-card">
+<div class="phv-title">📐 Growth spurt timing — Mirwald maturity offset</div>
+<div class="phv-grid">
+<div class="phv-stat">
+<div class="phv-val" id="phvOffset">—</div>
+<div class="phv-lbl">years from peak growth</div>
+</div>
+<div class="phv-stat">
+<div class="phv-val" id="phvAge">—</div>
+<div class="phv-lbl">estimated age at peak</div>
+</div>
+</div>
+<div class="phv-note" id="phvNote"></div>
+</div>
+</div>
+<div class="sport-card fade-up fade-up-3">
+<div class="sport-title">🏅 Height in a sporting context</div>
+<div class="sport-intro" id="sportIntro"></div>
+<div class="sport-tags" id="sportTags"></div>
+<div class="sport-caveat">
+<strong>Please read this bit.</strong> Height is one small factor among many, and a poor predictor of who succeeds in a sport. Elite athletes routinely fall well outside the typical height range for their event. Skill, enjoyment, work ethic, coaching and simply staying in the game matter far more — especially at this age. Nothing here should be used to steer a child toward or away from any sport. Let them play what they love.
+      </div>
+</div>
+<div class="fade-up fade-up-4" style="background:#ECFFF6;border:1px solid #BDF7DA;border-radius:16px;padding:18px 20px;margin:16px 0;">
+<div style="font-weight:800;color:#12372A;margin-bottom:6px;">🔒 Privacy-first by design</div>
+<div style="font-size:12px;line-height:1.65;color:#4A6B58;">All measurements and results remain inside your browser. V2Fitness does not collect, transmit, store or retain child names, dates of birth, heights, weights, parent heights, adult-height estimates, PHV estimates or growth-stage results. This module contains no account registration or embedded contact form.</div>
+</div>
+<div class="fade-up fade-up-4" style="background:#FFF4E6;border-left:4px solid #F97316;border-radius:12px;padding:16px 18px;margin:14px 0;font-size:11px;line-height:1.65;color:#70421F;">
+<strong>Educational use only.</strong> These outputs are statistical estimates, not medical advice, diagnosis, treatment, injury clearance, talent identification or a training prescription. PHV estimates should not be used alone to increase or reduce training load. Consider health, pain, movement competency, training age, workload, supervision, sleep and recovery, and consult an appropriately qualified health professional where needed.
+    </div>
+</section></div>
+<div class="action-row">
+<button class="action-btn" onclick="window.print()" type="button">🖨️ Print / Save as PDF</button>
+<button class="action-btn" onclick="resetForm()" type="button">↩ New estimate</button>
+</div>
+<div class="reassess-card">
+<div class="reassess-icon">📅</div>
+<div class="reassess-text">
+<strong>Re-measure in 4–6 months.</strong> Estimates become more accurate as a child approaches their growth spurt. Print this page and compare next time.
+      </div>
+</div>
+<div class="disclaimer">
+<div class="disclaimer-title">Not medical advice</div>
+<p>A statistical estimate — not a diagnosis, not a guarantee, and not a substitute for a GP or paediatrician. Khamis-Roche method (<em>Pediatrics</em> 1994;94:504–507). If you have any concern about your child's growth, speak to a doctor.</p>
+</div>
+
+<footer>
+<strong>V2 Youth OS by V2Fitness</strong> — science-informed youth development<br/>
+    Khamis HJ &amp; Roche AF, <em>Pediatrics</em> 1994;94:504–507 · <a href="/youth-os/growth-spurt-estimator/">Module 02: Growth Spurt &amp; PHV</a>
+</footer>
+
+<script>
+/* ══════ Khamis-Roche coefficients — verified from the 1994 paper ══════ */
+var CM_TO_IN = 1/2.54, IN_TO_CM = 2.54, KG_TO_LB = 2.20462;
+
+var MALES = {
+4.0:[-10.2567,1.23812,-0.0087235,0.50286], 4.5:[-10.7190,1.15964,-0.0074454,0.52887],
+5.0:[-11.0213,1.10674,-0.0064778,0.53919], 5.5:[-11.1556,1.07480,-0.0057760,0.53691],
+6.0:[-11.1138,1.05923,-0.0052947,0.52513], 6.5:[-11.0221,1.05542,-0.0049892,0.50692],
+7.0:[-10.9984,1.05877,-0.0048144,0.48538], 7.5:[-11.0214,1.06467,-0.0047256,0.46361],
+8.0:[-11.0696,1.06853,-0.0046778,0.44469], 8.5:[-11.1220,1.06572,-0.0046261,0.43171],
+9.0:[-11.1571,1.05166,-0.0045254,0.42776], 9.5:[-11.1405,1.02174,-0.0043311,0.43593],
+10.0:[-11.0380,0.97135,-0.0039981,0.45932], 10.5:[-10.8286,0.89589,-0.0034814,0.50101],
+11.0:[-10.4917,0.81239,-0.0029050,0.54781], 11.5:[-10.0065,0.74134,-0.0024167,0.58409],
+12.0:[-9.3522,0.68325,-0.0020076,0.60927], 12.5:[-8.6055,0.63869,-0.0016681,0.62279],
+13.0:[-7.8632,0.60818,-0.0013895,0.62407], 13.5:[-7.1348,0.59228,-0.0011624,0.61253],
+14.0:[-6.4299,0.59151,-0.0009776,0.58762], 14.5:[-5.7578,0.60643,-0.0008261,0.54875],
+15.0:[-5.1282,0.63757,-0.0006988,0.49536], 15.5:[-4.5092,0.68548,-0.0005863,0.42687],
+16.0:[-3.9292,0.75069,-0.0004795,0.34271], 16.5:[-3.4873,0.83375,-0.0003695,0.24231],
+17.0:[-3.2830,0.93520,-0.0002470,0.12510], 17.5:[-3.4156,1.05558,-0.0001027,-0.00950]
+};
+
+var FEMALES = {
+4.0:[-8.13250,1.24768,-0.019435,0.44774], 4.5:[-6.47656,1.22177,-0.018519,0.41381],
+5.0:[-5.13582,1.19932,-0.017530,0.38467], 5.5:[-4.13791,1.17880,-0.016484,0.36039],
+6.0:[-3.51039,1.15866,-0.015400,0.34105], 6.5:[-3.14322,1.13737,-0.014294,0.32672],
+7.0:[-2.87645,1.11342,-0.013184,0.31748], 7.5:[-2.66291,1.08525,-0.012086,0.31340],
+8.0:[-2.45559,1.05135,-0.011019,0.31457], 8.5:[-2.20728,1.01018,-0.009999,0.32105],
+9.0:[-1.87098,0.96020,-0.009044,0.33291], 9.5:[-1.06330,0.89989,-0.008171,0.35025],
+10.0:[0.33468,0.82771,-0.007397,0.37312], 10.5:[1.97366,0.74213,-0.006739,0.40161],
+11.0:[3.50436,0.67173,-0.006136,0.42042], 11.5:[4.57747,0.64150,-0.005518,0.41686],
+12.0:[4.84365,0.64452,-0.004894,0.39490], 12.5:[4.27869,0.67386,-0.004272,0.35850],
+13.0:[3.21417,0.72260,-0.003661,0.31163], 13.5:[1.83456,0.78383,-0.003067,0.25826],
+14.0:[0.32425,0.85062,-0.002500,0.20235], 14.5:[-1.13224,0.91605,-0.001967,0.14787],
+15.0:[-2.35055,0.97319,-0.001477,0.09880], 15.5:[-3.10326,1.01514,-0.001037,0.05909],
+16.0:[-3.17885,1.03496,-0.000655,0.03272], 16.5:[-2.41657,1.02573,-0.000340,0.02364],
+17.0:[-0.65579,0.98054,-0.000100,0.03584], 17.5:[2.26429,0.89246,0.000057,0.07327]
+};
+
+function getCoeffs(age, sx) {
+  var t = (sx === 'male') ? MALES : FEMALES;
+  var ages = Object.keys(t).map(Number).sort(function(a,b){return a-b;});
+  if (age <= ages[0]) return t[ages[0]];
+  if (age >= ages[ages.length-1]) return t[ages[ages.length-1]];
+  var lo = ages[0], hi = ages[ages.length-1];
+  for (var i = 0; i < ages.length-1; i++) {
+    if (age >= ages[i] && age <= ages[i+1]) { lo = ages[i]; hi = ages[i+1]; break; }
+  }
+  if (lo === hi) return t[lo];
+  var f = (age - lo) / (hi - lo);
+  return t[lo].map(function(v, i) { return v + (t[hi][i] - v) * f; });
+}
+
+function predictHeight(o) {
+  var adj  = (o.sex === 'male') ? 13 : -13;
+  var mpCm = (o.fatherHeightCm + o.motherHeightCm + adj) / 2;
+  var hIn  = o.childHeightCm * CM_TO_IN;
+  var wLb  = o.childWeightKg * KG_TO_LB;
+  var mpIn = mpCm * CM_TO_IN;
+
+  var c = getCoeffs(o.childAgeYears, o.sex);
+  var predCm = (c[0] + c[1]*hIn + c[2]*wLb + c[3]*mpIn) * IN_TO_CM;
+
+  var mad50 = ((o.sex === 'male') ? 0.851 : 0.657) * IN_TO_CM;
+  var bnd90 = ((o.sex === 'male') ? 2.101 : 1.675) * IN_TO_CM;
+  var pah   = (o.childHeightCm / predCm) * 100;
+
+  var band, label;
+  if      (pah < 82) { band='pre-phv';     label='Early growth phase'; }
+  else if (pah < 88) { band='approaching'; label='Approaching growth spurt'; }
+  else if (pah < 93) { band='at-phv';      label='At or near growth spurt'; }
+  else if (pah < 97) { band='post-phv';    label='Growth slowing'; }
+  else               { band='near-adult';  label='Near adult height'; }
+
+  var ti = predCm * CM_TO_IN;
+  var r  = function(n){ return Math.round(n*10)/10; };
+
+  return {
+    predictedCm: r(predCm),
+    predictedFtIn: Math.floor(ti/12) + 'ft ' + Math.round(ti%12) + 'in',
+    midParentCm: r(mpCm),
+    rangeLow50: r(predCm - mad50), rangeHigh50: r(predCm + mad50),
+    rangeLow90: r(predCm - bnd90), rangeHigh90: r(predCm + bnd90),
+    pahPct: r(pah),
+    maturityBand: band, maturityLabel: label,
+    growthRemaining: r(predCm - o.childHeightCm)
+  };
+}
+
+/* ══════ Mirwald maturity offset (2002) ══════ */
+function mirwaldOffset(o) {
+  var leg = o.standingHeightCm - o.sittingHeightCm;
+  var whr = (o.weightKg / o.standingHeightCm) * 100;
+  var a   = o.ageYears;
+  var sh  = o.sittingHeightCm;
+  var off;
+
+  if (o.sex === 'male') {
+    off = -9.236
+        + (0.0002708 * leg * sh)
+        + (-0.001663 * a * leg)
+        + (0.007216 * a * sh)
+        + (0.02292 * whr);
+  } else {
+    off = -9.376
+        + (0.0001882 * leg * sh)
+        + (0.0022 * a * leg)
+        + (0.005841 * a * sh)
+        + (-0.002658 * a * o.weightKg)
+        + (0.07693 * whr);
+  }
+
+  var r = function(n){ return Math.round(n*10)/10; };
+  return { offsetYears: r(off), ageAtPhv: r(a - off) };
+}
+
+/* ══════ State ══════ */
+var unit = 'metric', sex = 'male', advOpen = false;
+var consent = { c1:false, c2:false, c3:false };
+
+/* ══════ Date of birth → decimal age ══════ */
+function decimalAgeFromDob(dobStr) {
+  if (!dobStr) return null;
+  var dob = new Date(dobStr + 'T00:00:00');
+  if (isNaN(dob.getTime())) return null;
+  var now = new Date();
+  if (dob > now) return null;
+  var ms = now - dob;
+  return ms / (1000 * 60 * 60 * 24 * 365.25);
+}
+
+function updateAge() {
+  var badge   = document.getElementById('ageBadge');
+  var icon    = document.getElementById('ageBadgeIcon');
+  var text    = document.getElementById('ageBadgeText');
+  var decimal = document.getElementById('ageBadgeDecimal');
+  var dobStr  = document.getElementById('childDob').value;
+
+  var age = decimalAgeFromDob(dobStr);
+
+  if (age === null) {
+    badge.classList.remove('visible', 'invalid');
+    return;
+  }
+
+  badge.classList.add('visible');
+
+  /* Human-readable label from calendar arithmetic, not the decimal —
+     avoids floor() artifacts like 13.00 yrs displaying as "12y 11m". */
+  var dob   = new Date(dobStr + 'T00:00:00');
+  var now   = new Date();
+  var years = now.getFullYear() - dob.getFullYear();
+  var months= now.getMonth() - dob.getMonth();
+  if (now.getDate() < dob.getDate()) months--;
+  if (months < 0) { years--; months += 12; }
+
+  var label = years + ' year' + (years === 1 ? '' : 's') +
+              (months > 0 ? ', ' + months + ' month' + (months === 1 ? '' : 's') : '');
+
+  if (age < 4) {
+    badge.classList.add('invalid');
+    icon.textContent = '⚠️';
+    text.textContent = label + ' — too young. This method is validated from age 4.0.';
+    decimal.textContent = '';
+  } else if (age > 17.5) {
+    badge.classList.add('invalid');
+    icon.textContent = '⚠️';
+    text.textContent = label + ' — too old. This method is validated only to age 17.5.';
+    decimal.textContent = '';
+  } else {
+    badge.classList.remove('invalid');
+    icon.textContent = '🎂';
+    text.textContent = label;
+    decimal.textContent = age.toFixed(2) + ' yrs';
+  }
+
+  refreshSubmit();
+}
+
+/* ══════ Sitting height helper: floor-mark minus box height ══════ */
+function computeSitting() {
+  var mark = parseFloat(document.getElementById('floorMark').value);
+  var box  = parseFloat(document.getElementById('boxHeight').value);
+  var out  = document.getElementById('sittingHelperOut');
+  var u    = (unit === 'metric') ? 'cm' : 'in';
+
+  if (!mark || !box) { out.classList.remove('visible', 'bad'); return; }
+
+  var sit = mark - box;
+  out.classList.add('visible');
+
+  if (sit <= 0) {
+    out.classList.add('bad');
+    out.textContent = 'That gives ' + sit.toFixed(1) + ' ' + u +
+      ' — the box cannot be taller than the head mark. Check both numbers.';
+    return;
+  }
+
+  out.classList.remove('bad');
+  out.textContent = '→ Sitting height = ' + sit.toFixed(1) + ' ' + u + '. Filled in below.';
+  document.getElementById('sittingHeight').value = sit.toFixed(1);
+  checkSitting();
+}
+
+/* Live plausibility check — sitting height should be ~half of standing */
+function checkSitting() {
+  var sit   = parseFloat(document.getElementById('sittingHeight').value);
+  var stand = parseFloat(document.getElementById('childHeight').value);
+  var el    = document.getElementById('sittingCheck');
+
+  if (!sit || !stand) { el.classList.remove('visible', 'ok', 'bad'); return; }
+
+  var ratio = (sit / stand) * 100;   /* Cormic index — typically 50–55 in children */
+  el.classList.add('visible');
+  el.classList.remove('ok', 'bad');
+
+  if (sit >= stand) {
+    el.classList.add('bad');
+    el.textContent = '✗ Sitting height cannot be more than standing height. You may have measured from the floor — subtract the box height, or use the helper above.';
+  } else if (ratio > 65) {
+    el.classList.add('bad');
+    el.textContent = '✗ That is ' + ratio.toFixed(0) + '% of standing height — far too high. Almost certainly measured from the floor. Subtract the box height.';
+  } else if (ratio < 40) {
+    el.classList.add('bad');
+    el.textContent = '✗ That is only ' + ratio.toFixed(0) + '% of standing height — too low. Sitting height includes the head and neck, not just the torso.';
+  } else if (ratio < 47 || ratio > 58) {
+    el.classList.add('ok');
+    el.style.color = '#E8960A';
+    el.textContent = '⚠ That is ' + ratio.toFixed(0) + '% of standing height. Usually it lands around 50–55%. Worth double-checking, though it can be legitimate.';
+  } else {
+    el.classList.add('ok');
+    el.style.color = '';
+    el.textContent = '✓ That is ' + ratio.toFixed(0) + '% of standing height — right where it should be.';
+  }
+}
+
+/* ══════ Consent ══════ */
+function toggleConsent(id) {
+  consent[id] = !consent[id];
+  var item = document.getElementById(id);
+  item.classList.toggle('checked', consent[id]);
+  item.setAttribute('aria-checked', consent[id] ? 'true' : 'false');
+  refreshSubmit();
+}
+
+function consentComplete() {
+  return consent.c1 && consent.c2 && consent.c3;
+}
+
+function refreshSubmit() {
+  var ok = consentComplete();
+  document.getElementById('submitBtn').disabled = !ok;
+  document.getElementById('consentCard').classList.toggle('complete', ok);
+  document.getElementById('submitHint').style.display = ok ? 'none' : 'block';
+}
+
+function setUnit(u) {
+  unit = u;
+  document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
+  document.getElementById('btn-imperial').classList.toggle('active', u === 'imperial');
+  var m = (u === 'metric');
+  document.getElementById('label-height').textContent  = m ? 'Standing height (cm)' : 'Standing height (in)';
+  document.getElementById('label-weight').textContent  = m ? 'Weight (kg)' : 'Weight (lb)';
+  document.getElementById('label-father').textContent  = m ? "Father's height (cm)" : "Father's height (in)";
+  document.getElementById('label-mother').textContent  = m ? "Mother's height (cm)" : "Mother's height (in)";
+  ['childHeight','childWeight','fatherHeight','motherHeight'].forEach(function(id){
+    var input = document.getElementById(id);
+    if (input) input.value = '';
+  });
+}
+
+function setSex(s) {
+  sex = s;
+  saveYouthGrowthProfile();
+  document.getElementById('btn-male').classList.toggle('active', s === 'male');
+  document.getElementById('btn-female').classList.toggle('active', s === 'female');
+}
+
+function toggleAdvanced() {
+  advOpen = !advOpen;
+  var toggle = document.getElementById('advToggle');
+  toggle.classList.toggle('open', advOpen);
+  toggle.setAttribute('aria-expanded', advOpen ? 'true' : 'false');
+  document.getElementById('advancedPanel').classList.toggle('open', advOpen);
+  // Preserve entered measurements when collapsing the panel.
+}
+
+/* ══════ Calculate ══════ */
+
+function saveYouthGrowthProfile(){
+  var dobEl = document.getElementById('childDob');
+  var heightEl = document.getElementById('childHeight');
+  var weightEl = document.getElementById('childWeight');
+  var nameEl = document.getElementById('childName');
+
+  if (!dobEl || !heightEl || !weightEl) return;
+
+  var dob = dobEl.value;
+  var hRaw = parseFloat(heightEl.value);
+  var wRaw = parseFloat(weightEl.value);
+
+  if (!dob || !sex || !Number.isFinite(hRaw) || !Number.isFinite(wRaw)) return;
+
+  var hCm = unit === 'metric' ? hRaw : hRaw * 2.54;
+  var wKg = unit === 'metric' ? wRaw : wRaw * 0.45359237;
+
+  try {
+    sessionStorage.setItem('v2YouthGrowthProfile', JSON.stringify({
+      source: 'adult-height-estimator',
+      savedAt: new Date().toISOString(),
+      name: nameEl ? nameEl.value.trim() : '',
+      dob: dob,
+      sex: sex,
+      standingHeightCm: hCm,
+      weightKg: wKg
+    }));
+  } catch (e) {
+    /* Module 01 still works when browser storage is blocked. */
+  }
+}
+
+
+function calculateConfidenceScore(age, hCm, wKg, fCm, mCm) {
+  /*
+    Transparent Youth OS method-fit score (not a validated probability):
+    - 35 points: age suitability within the published 4.0–17.5 year range.
+      Full points from 6–16 years; reduced near the outer boundaries.
+    - 25 points: exact date of birth supplied.
+    - 20 points: both biological-parent heights supplied.
+    - 20 points: plausible current standing height and weight supplied.
+    Score capped at 95 because this is a non-X-ray population equation and
+    cannot capture skeletal age, health conditions or individual growth variation.
+  */
+  var agePoints;
+  if (age >= 6 && age <= 16) {
+    agePoints = 35;
+  } else if (age >= 4 && age < 6) {
+    agePoints = 25 + ((age - 4) / 2) * 10;
+  } else if (age > 16 && age <= 17.5) {
+    agePoints = 25 + ((17.5 - age) / 1.5) * 10;
+  } else {
+    agePoints = 0;
+  }
+
+  var dobPoints = 25;
+  var parentPoints = (Number.isFinite(fCm) && Number.isFinite(mCm)) ? 20 : 0;
+  var measurementPoints =
+    (Number.isFinite(hCm) && Number.isFinite(wKg) &&
+     hCm >= 80 && hCm <= 210 && wKg >= 10 && wKg <= 130) ? 20 : 0;
+
+  var score = Math.round(agePoints + dobPoints + parentPoints + measurementPoints);
+  score = Math.min(95, Math.max(0, score));
+
+  var label = score >= 90 ? 'High method fit'
+            : score >= 80 ? 'Good method fit'
+            : score >= 70 ? 'Moderate method fit'
+            : 'Limited method fit';
+
+  return {
+    score: score,
+    label: label,
+    ageText: age >= 6 && age <= 16
+      ? 'Comfortably within the supported age range'
+      : 'Within range, but close to an outer age boundary'
+  };
+}
+
+function calculate() {
+  var eb = document.getElementById('errorBanner');
+  eb.classList.remove('visible');
+
+  function fail(msg) {
+    eb.textContent = msg;
+    eb.classList.add('visible');
+    eb.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    return null;
+  }
+
+  if (!consentComplete()) {
+    return fail('Please confirm all three statements in the consent section before continuing.');
+  }
+
+  var name   = document.getElementById('childName').value.trim();
+  var dobStr = document.getElementById('childDob').value;
+  var age    = decimalAgeFromDob(dobStr);
+
+  var hRaw = parseFloat(document.getElementById('childHeight').value);
+  var wRaw = parseFloat(document.getElementById('childWeight').value);
+  var fRaw = parseFloat(document.getElementById('fatherHeight').value);
+  var mRaw = parseFloat(document.getElementById('motherHeight').value);
+
+  if (!dobStr || age === null) return fail('Please enter a valid date of birth.');
+  if (age < 4 || age > 17.5) return fail('This method is designed for ages 4.0 to 17.5 years.');
+  if (![hRaw,wRaw,fRaw,mRaw].every(Number.isFinite)) {
+    return fail('Please complete standing height, weight and both biological-parent heights.');
+  }
+
+  var hCm = unit === 'metric' ? hRaw : hRaw * 2.54;
+  var wKg = unit === 'metric' ? wRaw : wRaw * 0.45359237;
+  var fCm = unit === 'metric' ? fRaw : fRaw * 2.54;
+  var mCm = unit === 'metric' ? mRaw : mRaw * 2.54;
+
+  if (hCm < 80  || hCm > 210) return fail('Child height looks outside a realistic range — please check.');
+  if (wKg < 10  || wKg > 130) return fail('Child weight looks outside a realistic range — please check.');
+  if (fCm < 140 || fCm > 230) return fail("Father's height looks outside a realistic range.");
+  if (mCm < 130 || mCm > 215) return fail("Mother's height looks outside a realistic range.");
+
+  var r = predictHeight({
+    childHeightCm: hCm,
+    childWeightKg: wKg,
+    childAgeYears: age,
+    sex: sex,
+    fatherHeightCm: fCm,
+    motherHeightCm: mCm
+  });
+
+  if (!r || !Number.isFinite(r.predictedCm)) {
+    return fail('A result could not be calculated from these values. Please check the measurements.');
+  }
+
+  try {
+    sessionStorage.setItem('v2YouthGrowthProfile', JSON.stringify({
+      source: 'adult-height-estimator',
+      savedAt: new Date().toISOString(),
+      name: name,
+      dob: dobStr,
+      sex: sex,
+      standingHeightCm: hCm,
+      weightKg: wKg
+    }));
+  } catch (storageError) {
+    /* The calculator still works if browser storage is unavailable. */
+  }
+
+  render(r, null, name || (sex === 'male' ? 'Your son' : 'Your daughter'), age, hCm, wKg, fCm, mCm);
+}
+
+/* ══════ Render ══════ */
+function render(r, phv, name, age, hCm, wKg, fCm, mCm) {
+  var first = name.split(' ')[0];
+  var $ = function(id) { return document.getElementById(id); };
+  var cm   = r.predictedCm;
+  var male = (sex === 'male');
+
+  $('resultName').textContent   = name + "'s estimated adult height";
+  $('resultCm').textContent     = r.predictedCm;
+  $('resultFt').textContent     = r.predictedFtIn;
+  $('statPAH').textContent      = r.pahPct + '%';
+  $('statRemaining').textContent= r.growthRemaining;
+  $('statMidparent').textContent= r.midParentCm;
+
+  var confidence = calculateConfidenceScore(age, hCm, wKg, fCm, mCm);
+  if ($('confidenceScore')) $('confidenceScore').textContent = confidence.score;
+  if ($('confidenceLabel')) $('confidenceLabel').textContent = confidence.label;
+  if ($('confidenceAge')) $('confidenceAge').textContent = confidence.ageText;
+  if ($('confidenceFill')) {
+    $('confidenceFill').style.width = '0';
+    setTimeout(function(){ $('confidenceFill').style.width = confidence.score + '%'; }, 350);
+  }
+
+  $('growthBarPct').textContent = r.pahPct + '%';
+  $('growthBarMax').textContent = r.predictedCm + ' cm';
+  $('growthFill').style.width   = '0';
+  setTimeout(function(){ $('growthFill').style.width = r.pahPct + '%'; }, 300);
+
+  var lo = r.rangeLow90, hi = r.rangeHigh90, span = hi - lo;
+  var x = function(v){ return ((v - lo) / span) * 100; };
+  $('range50').style.cssText   = 'left:' + x(r.rangeLow50) + '%;width:' + (x(r.rangeHigh50) - x(r.rangeLow50)) + '%;';
+  $('rangePoint').style.cssText= 'left:' + x(r.predictedCm) + '%;';
+  $('rangeLow').textContent    = lo + ' cm';
+  $('rangeHigh').textContent   = hi + ' cm';
+  $('rangeLabel').textContent  = lo + '–' + hi + ' cm';
+  if ($('workAge')) $('workAge').textContent = age.toFixed(2) + ' years';
+  if ($('workChild')) $('workChild').textContent = hCm.toFixed(1) + ' cm and ' + wKg.toFixed(1) + ' kg';
+  if ($('workParents')) $('workParents').textContent = r.midParentCm + ' cm target midpoint';
+  if ($('workEstimate')) $('workEstimate').textContent = r.predictedCm + ' cm (' + r.predictedFtIn + ')';
+  if ($('workBand')) $('workBand').textContent = r.rangeLow90 + '–' + r.rangeHigh90 + ' cm';
+
+  /* ── Contextual accuracy warnings — tailored to THIS child ──
+     Generic disclaimers get skimmed. Specific ones get read. */
+  var warn = [];
+
+  if (age >= 11 && age <= 15) {
+    warn.push('<strong>This is the least precise age band.</strong> Between 11 and 15, growth spurts arrive at wildly different times, and the method cannot see where ' + first +
+              ' is in theirs. Error is at its largest here. Re-measure in 4 months — accuracy improves sharply as the spurt approaches.');
+  } else if (age < 9) {
+    warn.push('<strong>' + first + ' is young, so the spurt is a long way off.</strong> The growth spurt has the biggest single influence on final height, and its timing is not yet visible. Expect this estimate to shift as ' +
+              first + ' gets older. Re-measure yearly.');
+  } else {
+    warn.push('<strong>' + first + ' is in a reasonably reliable age band</strong> for this method — but it remains an estimate with a real margin, shown above.');
+  }
+
+  var typicalHi = male ? 192 : 178;
+  var typicalLo = male ? 163 : 152;
+  if (cm >= typicalHi || cm <= typicalLo) {
+    warn.push('<strong>This estimate sits toward the extremes of the growth chart.</strong> The method is least accurate for children at the very tall or very short end — error can reach ±5–7 cm. Treat this figure with extra caution.');
+  }
+
+  warn.push('<strong>Built on white North American children.</strong> The method was developed on 223 boys and 210 girls from one US study. Its accuracy for children of other ethnic backgrounds has never been properly established. If ' +
+            first + ' is not of white European descent, widen the margin in your mind.');
+
+  warn.push('<strong>Less reliable if ' + first + ' has a condition affecting growth</strong>, or trains intensively in a sport like elite gymnastics. It is not a substitute for a GP or paediatrician — if you have any concern at all about growth, ask one.');
+
+  var accList = $('accuracyList');
+  accList.innerHTML = '';
+  warn.forEach(function(w) {
+    var li = document.createElement('li');
+    li.innerHTML = w;
+    accList.appendChild(li);
+  });
+
+  var MAT = {
+    'pre-phv': {
+      dot:'#4CAF82', cls:'pre-phv',
+      body: first + ' is in an early growth phase with a lot of growing still ahead. The main growth spurt has not started yet. Estimates carry more uncertainty at this stage — re-measure in 4–6 months.',
+      tip:'🏃 Training focus: fundamental movement skills, coordination, and above all enjoyment. A great age to try lots of different sports.'
+    },
+    'approaching': {
+      dot:'#E8960A', cls:'approaching',
+      body: first + ' appears to be approaching their growth spurt. Expect growth to accelerate over the coming months. Estimate accuracy improves quickly from here.',
+      tip:'⚠️ Training note: as the spurt approaches, bones lengthen faster than muscles and tendons adapt. Ease off heavy loading; prioritise mobility, control and technique.'
+    },
+    'at-phv': {
+      dot:'#C0392B', cls:'at-phv',
+      body: first + ' appears to be at or near peak height velocity — the fastest phase of growth. This is the period where growth-related injury risk in sport is highest.',
+      tip:'🚨 Injury-risk window: growth plates are most vulnerable now. Consider easing training intensity, protecting sleep and nutrition, and watch for knee or heel pain (Osgood-Schlatter, Sever\u2019s disease). See a physio if pain appears.'
+    },
+    'post-phv': {
+      dot:'#4CAF82', cls:'post-phv',
+      body: first + "'s growth appears to be slowing — the main spurt looks to be behind them. Estimate accuracy is now at its highest.",
+      tip:'💪 Training opportunity: a good window to progressively build strength, with proper coaching and technique.'
+    },
+    'near-adult': {
+      dot:'#9B70D9', cls:'near-adult',
+      body: first + ' is close to adult height, with only a small amount of growth likely remaining.',
+      tip:'🏅 Physical maturation is nearly complete. Training can shift toward sport-specific performance and conditioning.'
+    }
+  }[r.maturityBand];
+
+  var mc = $('maturityCard');
+  mc.className = 'maturity-card fade-up fade-up-2 ' + MAT.cls;
+  $('maturityDot').style.background = MAT.dot;
+  $('maturityTitle').textContent    = r.maturityLabel;
+  $('maturityPahDisplay').textContent = r.pahPct + '% PAH';
+  $('maturityBody').textContent      = MAT.body;
+  $('maturityTip').textContent       = MAT.tip;
+
+  /* ── PHV / Mirwald card ── */
+  var pc = $('phvCard');
+  if (phv) {
+    pc.classList.add('visible');
+    var off = phv.offsetYears;
+    $('phvOffset').textContent = (off > 0 ? '+' : '') + off;
+    $('phvAge').textContent    = phv.ageAtPhv;
+
+    var note;
+    if (off < -0.5) {
+      note = '📈 The estimate places ' + first + ' about <strong>' + Math.abs(off) +
+             ' year(s) before</strong> peak growth, with the spurt around age <strong>' + phv.ageAtPhv +
+             '</strong>. Training can emphasise skill, coordination and movement quality now, with heavier loading introduced later.';
+    } else if (off <= 1.0) {
+      note = '🚨 The estimate places ' + first + ' <strong>in or very near</strong> the peak growth window (around age <strong>' +
+             phv.ageAtPhv + '</strong>). This is the highest-risk period for growth-related injury. Consider easing training load and prioritising recovery, sleep and nutrition.';
+    } else {
+      note = '✅ The estimate places ' + first + ' about <strong>' + off +
+             ' year(s) past</strong> peak growth (peak around age <strong>' + phv.ageAtPhv +
+             '</strong>). Progressive strength training becomes increasingly appropriate from here, with good coaching.';
+    }
+
+    if (!phv.inValidRange) {
+      note += '<br><br><strong>⚠️ Outside the validated age range.</strong> The Mirwald equations were validated for boys roughly 12–16 and girls 9–13. At this age the estimate is materially less reliable — treat it as very rough.';
+    }
+    note += '<br><br><em>Typical error is about ±1 year. This is a guide, never a date.</em>';
+
+    $('phvNote').innerHTML = note;
+  } else {
+    pc.classList.remove('visible');
+  }
+
+  /* ── Sport context — neutral, non-prescriptive ── */
+  $('sportIntro').textContent =
+    'For general interest only. An estimated adult height of ' + cm +
+    ' cm falls within the range commonly seen among adults competing in the sports below. This is background context, not a recommendation.';
+
+  var bands = male
+    ? [[190, ['Basketball','Volleyball','Rowing','High jump']],
+       [180, ['Swimming','Fast bowling (cricket)','AFL','Rugby forwards']],
+       [170, ['Soccer','Tennis','Rugby backs','Sprints']],
+       [160, ['Cycling','Distance running','Soccer','Martial arts']],
+       [0,   ['Gymnastics','Diving','Cycling','Distance running','Martial arts']]]
+    : [[178, ['Basketball','Volleyball','Rowing','High jump']],
+       [170, ['Swimming','Netball','Athletics','Soccer']],
+       [162, ['Soccer','Tennis','Hockey','Sprints']],
+       [155, ['Cycling','Distance running','Netball','Soccer']],
+       [0,   ['Gymnastics','Diving','Cycling','Distance running','Martial arts']]];
+
+  var list = [];
+  for (var i = 0; i < bands.length; i++) {
+    if (cm >= bands[i][0]) { list = bands[i][1]; break; }
+  }
+
+  var tagsEl = $('sportTags');
+  tagsEl.innerHTML = '';
+  list.forEach(function(s) {
+    var el = document.createElement('span');
+    el.className = 'sport-tag';
+    el.textContent = s;
+    tagsEl.appendChild(el);
+  });
+
+  var sec = $('result-section');
+  sec.classList.add('visible');
+  setTimeout(function(){ sec.scrollIntoView({ behavior:'smooth', block:'start' }); }, 100);
+}
+
+/* Email capture intentionally omitted: Module 01 does not transmit measurement or result data. */
+
+/* ══════ Reset ══════ */
+function resetForm() {
+  document.getElementById('result-section').classList.remove('visible');
+  ['childName','childDob','childHeight','childWeight','fatherHeight','motherHeight',
+   'sittingHeight','floorMark','boxHeight','emailInput'].forEach(function(id) {
+    var el = document.getElementById(id);
+    el.value = '';
+    el.disabled = false;
+  });
+  document.getElementById('emailMsg').classList.remove('visible');
+  document.getElementById('growthFill').style.width = '0';
+  document.getElementById('ageBadge').classList.remove('visible', 'invalid');
+
+  /* Consent deliberately NOT reset — the guardian has already given it
+     this session. Re-asking on every calculation is friction, not safety. */
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* Keep the unit toggle from wiping DOB */
+document.addEventListener('DOMContentLoaded', refreshSubmit);
+
+document.addEventListener('DOMContentLoaded', function(){
+  ['c1','c2','c3'].forEach(function(id){
+    var item = document.getElementById(id);
+    if (!item) return;
+    item.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleConsent(id);
+      }
+    });
+  });
+  refreshSubmit();
+});
+
+</script>
+</body>
+</html>

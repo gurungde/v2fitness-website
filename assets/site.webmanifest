@@ -1,0 +1,15 @@
+{
+  "name": "V2Fitness",
+  "short_name": "V2Fitness",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#12372A",
+  "theme_color": "#12372A",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
